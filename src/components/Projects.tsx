@@ -7,10 +7,10 @@ export const Projects = () => {
   const projects = [
     {
       title: 'Advanced Python Keylogger',
-      description: 'A sophisticated keylogger with log encryption, Telegram bot integration, screenshot capture on window changes, and precise keystroke tracking per application window.',
+      description: 'A sophisticated keylogger with log encryption, Telegram bot integration, Task Scheduling Features and precise keystroke tracking per application window.',
       image: 'https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=600&h=400&fit=crop',
       technologies: ['Python', 'Encryption', 'Telegram API', 'Windows API'],
-      github: 'https://github.com/XayZay',
+      github: 'https://github.com/XayZay/Keylogger',
       live: null,
     },
     {
