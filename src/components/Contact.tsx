@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/hooks/use-toast';
+import emailjs from 'emailjs-com';
 
 export const Contact = () => {
   const [formData, setFormData] = useState({
@@ -15,16 +16,21 @@ export const Contact = () => {
   const { toast } = useToast();
 
   const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    
-    // Simulate form submission
-    toast({
-      title: "Message sent!",
-      description: "Thanks for reaching out. I'll get back to you soon!",
+  e.preventDefault();
+  emailjs.sendForm('service_7cb20cs', 'template_5pf4fiy', e.target as HTMLFormElement, 'ZpNpdtUWmo48wMOL0')
+    .then(() => {
+      toast({
+        title: "Message sent!",
+        description: "Thanks for reaching out. I'll get back to you soon!",
+      });
+      setFormData({ name: '', email: '', message: '' });
+    }, () => {
+      toast({
+        title: "Error",
+        description: "Failed to send message. Please try again later.",
+      });
     });
-    
-    setFormData({ name: '', email: '', message: '' });
-  };
+};
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({
