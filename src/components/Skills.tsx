@@ -1,36 +1,8 @@
-
 import React from 'react';
 
 export const Skills = () => {
   const skillCategories = [
-    {
-      title: 'System Administration',
-      skills: [
-        { name: 'IT Asset Management & Repairs', level: 90 },
-        { name: 'Remote Desktop & IT Support', level: 95 },
-        { name: 'Office System Configurations', level: 90 },
-        { name: 'Endpoint Monitoring & Management', level: 70 },
-        { name: 'Windows Server & AD', level: 80 },
-        { name: 'EDR Solutions', level: 70 },
-      ],
-    },
-    {
-      title: 'Cybersecurity & Networking',
-      skills: [
-        { name: 'VMs & Cybersecurity Tools', level: 60 },
-        { name: 'Network Segmentation & Monitoring', level: 40 },
-        { name: 'Firewalls & VPNs', level: 30 },
-        { name: 'IDS/IPS', level: 20 },
-      ],
-    },
-    {
-      title: 'Tools & Cloud',
-      skills: [
-        { name: 'PowerShell, CMD, Sysinternals', level: 90 },
-        { name: 'PuTTY & Git', level: 90 },
-        { name: 'Cloud Solutions', level: 40 },
-      ],
-    },
+    // ...existing code...
   ];
 
   return (
@@ -76,18 +48,18 @@ export const Skills = () => {
         </div>
 
         <div className="mt-16 text-center">
-          <div className="inline-flex items-center space-x-8 bg-slate-800/50 backdrop-blur-sm rounded-xl p-6 border border-slate-700/50">
-            <div className="text-center">
+          <div className="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-4 sm:gap-8 bg-slate-800/50 backdrop-blur-sm rounded-xl p-6 border border-slate-700/50 w-full max-w-2xl mx-auto">
+            <div className="text-center flex-1 min-w-[120px]">
               <div className="text-3xl font-bold text-purple-400">5+</div>
               <div className="text-gray-300">Years Experience</div>
             </div>
-            <div className="w-px h-12 bg-slate-600"></div>
-            <div className="text-center">
+            <div className="hidden sm:block w-px h-12 bg-slate-600"></div>
+            <div className="text-center flex-1 min-w-[120px]">
               <div className="text-3xl font-bold text-purple-400">15+</div>
               <div className="text-gray-300">Projects Completed</div>
             </div>
-            <div className="w-px h-12 bg-slate-600"></div>
-            <div className="text-center">
+            <div className="hidden sm:block w-px h-12 bg-slate-600"></div>
+            <div className="text-center flex-1 min-w-[120px]">
               <div className="text-3xl font-bold text-purple-400">95%</div>
               <div className="text-gray-300">Client Satisfaction</div>
             </div>
