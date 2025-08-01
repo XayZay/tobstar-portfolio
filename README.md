@@ -43,7 +43,7 @@ Here are some highlights of my projects:
 
 - 📧 Email: [oluwatobilobaoyeyemi07@gmail.com]  
 - 🔗 LinkedIn: [https://www.linkedin.com/in/oluwatobilobaoyeyemi] 
-- 🌐 Portfolio: [https://tobstar-portfolio.netlify.com]
+- 🌐 Portfolio: [https://tobstar-portfolio.netlify.app]
 
 ---
 
