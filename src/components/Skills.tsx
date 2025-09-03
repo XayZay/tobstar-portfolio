@@ -2,7 +2,34 @@ import React from 'react';
 
 export const Skills = () => {
   const skillCategories = [
-    // ...existing code...
+    {
+      title: 'System Administration',
+      skills: [
+        { name: 'IT Asset Management & Repairs', level: 90 },
+        { name: 'Remote Desktop & IT Support', level: 95 },
+        { name: 'Office System Configurations', level: 90 },
+        { name: 'Endpoint Monitoring & Management', level: 70 },
+        { name: 'Windows Server & AD', level: 80 },
+        { name: 'EDR Solutions', level: 70 },
+      ],
+    },
+    {
+      title: 'Cybersecurity & Networking',
+      skills: [
+        { name: 'VMs & Cybersecurity Tools', level: 60 },
+        { name: 'Network Segmentation & Monitoring', level: 40 },
+        { name: 'Firewalls & VPNs', level: 30 },
+        { name: 'IDS/IPS', level: 20 },
+      ],
+    },
+    {
+      title: 'Tools & Cloud',
+      skills: [
+        { name: 'PowerShell, CMD, Sysinternals', level: 90 },
+        { name: 'PuTTY & Git', level: 90 },
+        { name: 'Cloud Solutions', level: 40 },
+      ],
+    },
   ];
 
   return (
