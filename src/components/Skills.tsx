@@ -1,94 +1,49 @@
-import React from 'react';
+import { certifications, skillGroups } from '@/data/portfolio';
 
 export const Skills = () => {
-  const skillCategories = [
-    {
-      title: 'System Administration',
-      skills: [
-        { name: 'IT Asset Management & Repairs', level: 90 },
-        { name: 'Remote Desktop & IT Support', level: 95 },
-        { name: 'Office System Configurations', level: 90 },
-        { name: 'Endpoint Monitoring & Management', level: 70 },
-        { name: 'Windows Server & AD', level: 80 },
-        { name: 'EDR Solutions', level: 70 },
-      ],
-    },
-    {
-      title: 'Cybersecurity & Networking',
-      skills: [
-        { name: 'VMs & Cybersecurity Tools', level: 60 },
-        { name: 'Network Segmentation & Monitoring', level: 40 },
-        { name: 'Firewalls & VPNs', level: 30 },
-        { name: 'IDS/IPS', level: 20 },
-      ],
-    },
-    {
-      title: 'Tools & Cloud',
-      skills: [
-        { name: 'PowerShell, CMD, Sysinternals', level: 90 },
-        { name: 'PuTTY & Git', level: 90 },
-        { name: 'Cloud Solutions', level: 40 },
-      ],
-    },
-  ];
-
   return (
-    <section id="skills" className="py-20 px-4">
-      <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-            Skills & Technologies
-          </h2>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-            Expertise in cybersecurity, system administration, and IT automation. 
-            Constantly learning and improving my skills in the ever-evolving IT landscape.
-          </p>
+    <section id="skills" className="mx-auto max-w-[980px] px-5 py-24">
+      <div className="border-t border-[#d8d3c5] pt-7">
+        <div className="mb-12 grid gap-8 md:grid-cols-[0.75fr_1.25fr]">
+          <p className="font-mono text-xs uppercase tracking-[0.32em] text-[#77736a]">Uses</p>
+          <div>
+            <h2 className="font-serif text-4xl leading-tight text-[#1f1f1d] md:text-5xl">
+              Tools, platforms, and certifications.
+            </h2>
+            <p className="mt-5 text-lg leading-8 text-[#605c54]">
+              A practical stack for cloud deployments, network support, security labs, and backend automation.
+            </p>
+          </div>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-8">
-          {skillCategories.map((category, categoryIndex) => (
-            <div
-              key={categoryIndex}
-              className="bg-slate-800/50 backdrop-blur-sm rounded-xl p-6 border border-slate-700/50"
-            >
-              <h3 className="text-2xl font-semibold text-white mb-6 text-center">
-                {category.title}
-              </h3>
-              <div className="space-y-4">
-                {category.skills.map((skill, skillIndex) => (
-                  <div key={skillIndex}>
-                    <div className="flex justify-between items-center mb-2">
-                      <span className="text-gray-300 font-medium text-sm">{skill.name}</span>
-                      <span className="text-purple-400 text-sm">{skill.level}%</span>
-                    </div>
-                    <div className="w-full bg-slate-700 rounded-full h-2">
-                      <div
-                        className="bg-gradient-to-r from-purple-400 to-pink-400 h-2 rounded-full transition-all duration-1000 ease-out"
-                        style={{ width: `${skill.level}%` }}
-                      ></div>
-                    </div>
-                  </div>
-                ))}
+        <div className="grid gap-10 md:grid-cols-2">
+          <div className="space-y-8">
+            {skillGroups.map((category) => (
+              <div key={category.title} className="border-t border-[#d8d3c5] pt-5">
+                <h3 className="font-serif text-2xl text-[#1f1f1d]">{category.title}</h3>
+                <div className="mt-4 flex flex-wrap gap-x-4 gap-y-2">
+                  {category.skills.map((skill) => (
+                    <span key={skill} className="font-mono text-xs text-[#605c54]">
+                      {skill}
+                    </span>
+                  ))}
+                </div>
               </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
 
-        <div className="mt-16 text-center">
-          <div className="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-4 sm:gap-8 bg-slate-800/50 backdrop-blur-sm rounded-xl p-6 border border-slate-700/50 w-full max-w-2xl mx-auto">
-            <div className="text-center flex-1 min-w-[120px]">
-              <div className="text-3xl font-bold text-purple-400">5+</div>
-              <div className="text-gray-300">Years Experience</div>
-            </div>
-            <div className="hidden sm:block w-px h-12 bg-slate-600"></div>
-            <div className="text-center flex-1 min-w-[120px]">
-              <div className="text-3xl font-bold text-purple-400">15+</div>
-              <div className="text-gray-300">Projects Completed</div>
-            </div>
-            <div className="hidden sm:block w-px h-12 bg-slate-600"></div>
-            <div className="text-center flex-1 min-w-[120px]">
-              <div className="text-3xl font-bold text-purple-400">95%</div>
-              <div className="text-gray-300">Client Satisfaction</div>
+          <div className="border-t border-[#d8d3c5] pt-5">
+            <h3 className="font-serif text-2xl text-[#1f1f1d]">Certifications</h3>
+            <div className="mt-5 divide-y divide-[#d8d3c5]">
+              {certifications.map((cert) => (
+                <div key={`${cert.name}-${cert.issuer}`} className="grid gap-2 py-3 sm:grid-cols-[1fr_auto]">
+                  <div>
+                    <p className="text-sm font-medium text-[#1f1f1d]">{cert.name}</p>
+                    <p className="mt-1 text-sm text-[#77736a]">{cert.issuer}</p>
+                  </div>
+                  <p className="font-mono text-xs uppercase tracking-[0.16em] text-[#0f766e]">{cert.status}</p>
+                </div>
+              ))}
             </div>
           </div>
         </div>

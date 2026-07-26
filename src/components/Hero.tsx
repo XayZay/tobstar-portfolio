@@ -1,88 +1,76 @@
-
-import React from 'react';
-import { ChevronDown, Github, Linkedin, Mail } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import { ArrowRight, FileText, Github, Linkedin, Mail } from 'lucide-react';
+import { education, metrics, profile } from '@/data/portfolio';
 
 export const Hero = () => {
-  const scrollToAbout = () => {
-    document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' });
-  };
+  const educationSummary = education[0]
+    ? `${education[0].degree} @ ${education[0].school} · ${education[0].end}`
+    : 'Cloud and network engineering portfolio';
 
   return (
-    <section id="home" className="min-h-screen flex items-center justify-center relative overflow-x-hidden overflow-y-hidden">
-      {/* Animated background */}
-      <div className="absolute inset-0 opacity-20">
-        <div className="absolute top-1/4 left-1/4 w-40 h-40 sm:w-64 sm:h-64 bg-purple-500 rounded-full mix-blend-multiply filter blur-xl animate-pulse"></div>
-        <div className="absolute top-1/3 right-1/4 w-40 h-40 sm:w-64 sm:h-64 bg-blue-500 rounded-full mix-blend-multiply filter blur-xl animate-pulse animation-delay-2000"></div>
-        <div className="absolute bottom-1/4 left-1/3 w-40 h-40 sm:w-64 sm:h-64 bg-pink-500 rounded-full mix-blend-multiply filter blur-xl animate-pulse animation-delay-4000"></div>
-      </div>
+    <section id="home" className="mx-auto min-h-[92vh] max-w-[980px] px-5 pb-24 pt-44 md:pt-56">
+      <div className="max-w-3xl">
+        <p className="mb-8 font-mono text-xs uppercase tracking-[0.32em] text-[#77736a]">
+          {profile.name}
+        </p>
 
-      <div className="max-w-4xl mx-auto text-center px-4 relative z-10">
-        <div className="animate-fade-in">
-          <h1 className="text-5xl md:text-7xl font-bold text-white mb-6">
-            Hi, I'm{' '}
-            <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-              Tobi
-            </span>
-          </h1>
-          <h2 className="text-2xl md:text-3xl text-gray-300 mb-8">
-            Cybersecurity Specialist & Network Engineer
-          </h2>
-          <p className="text-lg text-gray-400 mb-12 max-w-2xl mx-auto">
-            Passionate about IT automation, cloud engineering, and cybersecurity. 
-            Building secure, efficient systems and protecting digital infrastructure with modern technologies.
-          </p>
+        <h1 className="font-serif text-6xl leading-[0.92] tracking-normal text-[#1f1f1d] md:text-8xl">
+          Cloud Engineer
+        </h1>
+        <h2 className="mt-4 font-serif text-4xl leading-tight text-[#77736a] md:text-5xl">
+          Network Engineer
+        </h2>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
-            <Button
-              onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
-              className="bg-purple-600 hover:bg-purple-700 text-white px-8 py-3 rounded-full transition-all duration-300 hover:scale-105"
-            >
-              View My Work
-            </Button>
-            <Button
-              onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-              variant="outline"
-              className="border-purple-400 text-purple-400 hover:bg-purple-400 hover:text-white px-8 py-3 rounded-full transition-all duration-300 hover:scale-105"
-            >
-              Get In Touch
-            </Button>
-          </div>
+        <p className="mt-8 max-w-2xl text-lg leading-8 text-[#605c54]">
+          {educationSummary}. Based in {profile.location}. Building cloud-backed tools, commissioning networks, and documenting infrastructure from lab to production.
+        </p>
 
-          <div className="flex justify-center space-x-6">
-            <a
-              href="https://github.com/XayZay"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-gray-400 hover:text-white transition-colors duration-300 hover:scale-110 transform"
-            >
-              <Github size={24} />
-            </a>
-            <a
-              href="https://www.linkedin.com/in/oluwatobilobaoyeyemi"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-gray-400 hover:text-white transition-colors duration-300 hover:scale-110 transform"
-            >
-              <Linkedin size={24} />
-            </a>
-            <a
-              href="mailto:oluwatobilobaoyeyemi07@gmail.com"
-              className="text-gray-400 hover:text-white transition-colors duration-300 hover:scale-110 transform"
-            >
-              <Mail size={24} />
-            </a>
-          </div>
+        <p className="mt-6 font-mono text-sm leading-7 text-[#4c4a45]">
+          $ focus: aws · networking · firewalls · docker · infrastructure · security-aware systems
+        </p>
+
+        <blockquote className="mt-8 border-l-2 border-[#0f766e] pl-5 font-serif text-lg italic text-[#1f1f1d]">
+          I like infrastructure work that proves itself: deployed, monitored, documented, and understandable under pressure.
+        </blockquote>
+
+        <div className="mt-10 flex flex-wrap gap-6 text-sm">
+          <a className="group inline-flex items-center gap-1 border-b border-[#1f1f1d] text-[#1f1f1d]" href="#about">
+            Now <ArrowRight size={14} className="transition group-hover:translate-x-1" />
+          </a>
+          <a className="group inline-flex items-center gap-1 text-[#605c54] transition hover:text-[#1f1f1d]" href="#projects">
+            Projects <ArrowRight size={14} className="transition group-hover:translate-x-1" />
+          </a>
+          <a className="group inline-flex items-center gap-1 text-[#605c54] transition hover:text-[#1f1f1d]" href="#skills">
+            Uses <ArrowRight size={14} className="transition group-hover:translate-x-1" />
+          </a>
+        </div>
+
+        <div className="mt-10 flex flex-wrap gap-3">
+          <a href={profile.github} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-full border border-[#d8d3c5] px-4 py-2 text-sm text-[#4c4a45] transition hover:border-[#1f1f1d] hover:text-[#1f1f1d]">
+            <Github size={16} /> GitHub
+          </a>
+          <a href={profile.linkedin} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-full border border-[#d8d3c5] px-4 py-2 text-sm text-[#4c4a45] transition hover:border-[#1f1f1d] hover:text-[#1f1f1d]">
+            <Linkedin size={16} /> LinkedIn
+          </a>
+          <a href={`mailto:${profile.email}`} className="inline-flex items-center gap-2 rounded-full border border-[#d8d3c5] px-4 py-2 text-sm text-[#4c4a45] transition hover:border-[#1f1f1d] hover:text-[#1f1f1d]">
+            <Mail size={16} /> Email
+          </a>
+          <a href={profile.resumeUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-full border border-[#d8d3c5] px-4 py-2 text-sm text-[#4c4a45] transition hover:border-[#1f1f1d] hover:text-[#1f1f1d]">
+            <FileText size={16} /> Resume
+          </a>
         </div>
       </div>
 
-      {/* Scroll indicator */}
-      <button
-        onClick={scrollToAbout}
-        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-white animate-bounce"
-      >
-        <ChevronDown size={32} />
-      </button>
+      <div className="mt-28 border-t border-[#d8d3c5] pt-7">
+        <p className="mb-5 font-mono text-xs uppercase tracking-[0.32em] text-[#77736a]">Signal</p>
+        <div className="grid gap-5 md:grid-cols-3">
+          {metrics.map((metric) => (
+            <div key={metric.label}>
+              <div className="font-serif text-4xl text-[#1f1f1d]">{metric.value}</div>
+              <div className="mt-1 text-sm leading-6 text-[#605c54]">{metric.label}</div>
+            </div>
+          ))}
+        </div>
+      </div>
     </section>
   );
 };

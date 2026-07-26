@@ -1,61 +1,58 @@
-# Oluwatobiloba Oyeyemi — Portfolio
+# Oluwatobiloba Oyeyemi Portfolio
 
-Welcome to my professional portfolio!  
-I am a focused and innovative Computer Science student passionate about software development, cybersecurity, and tech content creation.
+A refreshed personal portfolio for cybersecurity, networking, systems engineering, automation, and cloud-ready IT work.
 
----
+## Stack
 
-## About Me
+- Vite
+- React
+- TypeScript
+- Tailwind CSS
+- shadcn/ui
 
-- 🎓 **Education:** 300-level Computer Science student  
-- 💼 **Current Role:** Social Media Manager & Tech Enthusiast  
-- 📍 **Location:** Nigeria  
-- 🔗 **Certifications:** Certifications in HubSpot Academy & Alison on Social Media Management, Cisco IT Essentials, Cisco Cybersecurity Essentials, Cisco CyberOps Associate, TCM Academy Ethical Hacking Course
-- 🛠 **Skills:** Python, Networking, Cybersecurity, Social Media Management, Linux Knowledge and Windows System Administration
-- 🌱 **Currently Learning:** CompTIA Security+ & Cisco CCNA 
+## Local Development
 
----
+```bash
+npm install
+npm run dev
+```
 
-## Projects
+The Vite dev server is configured for port `8080`.
 
-Here are some highlights of my projects:
+## Content Updates
 
-| Project Name                     | Description                                    | Tech Stack             | Link                                   |
-|---------------------------------|------------------------------------------------|-----------------------|----------------------------------------|
-| Ethical Keylogger               | Basic keylogger built for ethical purposes     | Python                | [GitHub Repo](https://github.com/XayZay/python_keylogger) |
-| Credentials Breach Checker        | A tool to check if your credentials have ever been leaked online  | Python, haveIbeenpwned API | [GitHub Repo](https://github.com/XayZay/breach_checker) |
-| Lightweight Task Scheduler      | Python-based scheduler to run `.bat` files, and uses a Web Dashboard    | Python, MySQL         | [GitHub Repo](https://github.com/XayZay/task_scheduler) |
+Most portfolio copy lives in:
 
-*More projects can be found on my [GitHub profile](https://github.com/XayZay).*
+```text
+src/data/portfolio.ts
+```
 
----
+Update that file for profile details, projects, skills, metrics, and contact links.
 
-## Skills & Tools
+Use `docs/content-intake.md` to collect accurate content before the final themed revamp.
 
-- **Programming Languages:** Python, PHP, C++  
-- **Technologies:** Active Directory, MySQL, Linux, Windows  
-- **Tools:** Wireshark, Git,   
-- **Soft Skills:** Problem Solving, Analytical Thinking, Content Creation  
+## Progression Notes
 
----
+The current UI is temporary. Durable cleanup and deployment work should be preserved, but the final visual revamp should wait until a theme is provided.
 
-## Contact Me
+See `docs/portfolio-progression.md` for the order of progression and what should be treated as temporary versus durable.
 
-- 📧 Email: [oluwatobilobaoyeyemi07@gmail.com]  
-- 🔗 LinkedIn: [https://www.linkedin.com/in/oluwatobilobaoyeyemi] 
-- 🌐 Portfolio: [https://tobstar-portfolio.netlify.app]
+Use `docs/gap-register.md` to track missing content, product gaps, deployment gaps, and theme-hold items.
 
----
+## Contact
 
-## How to Reach Me
+The site uses direct contact links only: email, LinkedIn, GitHub, and resume PDF. No form service or environment variables are required.
 
-Feel free to connect if you want to collaborate, ask questions, or just say hi!
+## Resume
 
----
+The public resume PDF is served from:
 
-*Thank you for visiting my portfolio!*  
-        Oluwatobiloba Oyeyemi
+```text
+public/documents/Oyeyemi_Oluwatobiloba_CV.pdf
+```
 
----
+## AWS Deployment
 
-*This README was generated with ❤️ by ChatGPT*😝
+AWS Amplify Hosting configuration is included in `amplify.yml`.
+
+See `docs/aws-deployment.md` for Amplify and S3 + CloudFront deployment notes.

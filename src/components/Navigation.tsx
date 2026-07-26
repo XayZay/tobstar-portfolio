@@ -1,18 +1,19 @@
-
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
+import { profile } from '@/data/portfolio';
+
+const navItems = [
+  { name: 'Home', href: '#home' },
+  { name: 'Now', href: '#about' },
+  { name: 'Work', href: '#projects' },
+  { name: 'Projects', href: '#projects' },
+  { name: 'Uses', href: '#skills' },
+  { name: 'Contact', href: '#contact' },
+];
 
 export const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
-
-  const navItems = [
-    { name: 'Home', href: '#home' },
-    { name: 'About', href: '#about' },
-    { name: 'Projects', href: '#projects' },
-    { name: 'Skills', href: '#skills' },
-    { name: 'Contact', href: '#contact' },
-  ];
 
   useEffect(() => {
     const handleScroll = () => {
@@ -44,23 +45,25 @@ export const Navigation = () => {
   };
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-slate-900/80 backdrop-blur-md border-b border-slate-700/50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center py-4">
-          <div className="text-2xl font-bold text-white">
-            Portfolio
-          </div>
+    <nav className="fixed left-0 right-0 top-0 z-50 border-b border-[#d8d3c5]/70 bg-[#f7f5ef]/90 backdrop-blur">
+      <div className="mx-auto max-w-[980px] px-5">
+        <div className="flex items-center justify-between py-5">
+          <button
+            onClick={() => scrollToSection('#home')}
+            className="font-serif text-lg text-[#1f1f1d] transition hover:text-[#0f766e]"
+          >
+            {profile.handle}
+          </button>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex space-x-8">
+          <div className="hidden items-center gap-8 md:flex">
             {navItems.map((item) => (
               <button
                 key={item.name}
                 onClick={() => scrollToSection(item.href)}
-                className={`text-sm font-medium transition-colors duration-200 hover:text-purple-400 ${
+                className={`border-b text-sm transition-colors duration-200 hover:border-[#1f1f1d] hover:text-[#1f1f1d] ${
                   activeSection === item.href.substring(1)
-                    ? 'text-purple-400'
-                    : 'text-gray-300'
+                    ? 'border-[#1f1f1d] text-[#1f1f1d]'
+                    : 'border-transparent text-[#77736a]'
                 }`}
               >
                 {item.name}
@@ -71,20 +74,20 @@ export const Navigation = () => {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden text-white"
+            className="rounded-md border border-[#d8d3c5] p-2 text-[#1f1f1d] md:hidden"
+            aria-label="Toggle navigation"
           >
             {isOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
 
-        {/* Mobile Navigation */}
         {isOpen && (
-          <div className="md:hidden bg-slate-800/95 backdrop-blur-md rounded-lg my-4 p-4">
+          <div className="mb-4 rounded-md border border-[#d8d3c5] bg-[#fbfaf6] p-3 md:hidden">
             {navItems.map((item) => (
               <button
                 key={item.name}
                 onClick={() => scrollToSection(item.href)}
-                className="block w-full text-left py-2 text-gray-300 hover:text-purple-400 transition-colors duration-200"
+                className="block w-full rounded-md px-3 py-2 text-left text-[#605c54] transition-colors duration-200 hover:bg-[#eee9dd] hover:text-[#1f1f1d]"
               >
                 {item.name}
               </button>

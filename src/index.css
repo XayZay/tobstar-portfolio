@@ -97,5 +97,10 @@
 
   body {
     @apply bg-background text-foreground;
+    font-feature-settings: "ss01" on, "cv01" on;
+  }
+
+  html {
+    scroll-behavior: smooth;
   }
 }
