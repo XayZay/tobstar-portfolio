@@ -13,6 +13,7 @@ Use this file to track what is not complete yet. Keep visual-theme work out of t
 ## Content Gaps
 
 - Confirm whether the GitHub links selected from the public repo list are the preferred public project links.
+- Confirm whether CrossRoute should link to `ENYATA_BUILDATHON` long-term or move to a renamed public repo.
 - Confirm final copy for both Ghost Pay projects now that `GhostPay_BackendClient` and `GhostPay_Backend_AWS_Client` are shown separately.
 - Confirm whether pfSense Firewall Lab and Windows VM Penetration Test have repos, writeups, or should stay as request-only case studies.
 - Resume PDF added at `/documents/Oyeyemi_Oluwatobiloba_CV.pdf`; confirm this is the final public version.

@@ -101,6 +101,15 @@ export const projects = [
     status: "AWS Backend",
   },
   {
+    title: "CrossRoute",
+    description:
+      "Next.js 14 MVP foundation for an escrow and cross-border payout routing platform built for the Interswitch x Enyata hackathon. Includes role-aware demo auth, client and provider dashboards, project funding flows, milestone release logic, payout routing, notifications, and PRD-aligned API handlers.",
+    image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=900&h=600&fit=crop",
+    technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Server Actions", "API Routes", "Supabase-ready", "Interswitch-ready"],
+    github: "https://github.com/XayZay/ENYATA_BUILDATHON",
+    status: "Fintech MVP",
+  },
+  {
     title: "pfSense Firewall Lab",
     description:
       "Multi-VM secure network lab with pfSense firewall rules across Windows 11, Windows Server 2022, and Kali Linux. Included Active Directory setup, domain joining, and group policy practice.",
@@ -171,6 +180,6 @@ export const certifications = [
 
 export const metrics = [
   { value: "2026", label: "Expected B.Sc. Computer Science graduation" },
-  { value: "7", label: "Featured cloud, network, security, and tooling projects" },
+  { value: "8", label: "Featured cloud, network, security, and tooling projects" },
   { value: "9", label: "Completed and in-view certifications" },
 ];
