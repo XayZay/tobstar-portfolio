@@ -33,13 +33,13 @@ export const Hero = () => {
         </blockquote>
 
         <div className="mt-10 flex flex-wrap gap-6 text-sm">
-          <a className="group inline-flex items-center gap-1 border-b border-[#1f1f1d] text-[#1f1f1d]" href="#about">
+          <a className="group inline-flex items-center gap-1 border-b border-[#1f1f1d] text-[#1f1f1d]" href="/now">
             Now <ArrowRight size={14} className="transition group-hover:translate-x-1" />
           </a>
-          <a className="group inline-flex items-center gap-1 text-[#605c54] transition hover:text-[#1f1f1d]" href="#projects">
+          <a className="group inline-flex items-center gap-1 text-[#605c54] transition hover:text-[#1f1f1d]" href="/projects">
             Projects <ArrowRight size={14} className="transition group-hover:translate-x-1" />
           </a>
-          <a className="group inline-flex items-center gap-1 text-[#605c54] transition hover:text-[#1f1f1d]" href="#skills">
+          <a className="group inline-flex items-center gap-1 text-[#605c54] transition hover:text-[#1f1f1d]" href="/uses">
             Uses <ArrowRight size={14} className="transition group-hover:translate-x-1" />
           </a>
         </div>

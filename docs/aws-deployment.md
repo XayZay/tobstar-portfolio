@@ -12,6 +12,14 @@ This project is a static Vite app. The simplest AWS path is AWS Amplify Hosting,
 6. Verify the Amplify preview URL.
 7. Add a custom domain in Amplify if needed.
 
+## Amplify Redirect Rule For Client-Side Routes
+
+The portfolio uses client-side routes such as `/work`, `/projects`, `/uses`, and `/contact`. Add this redirect/rewrite rule in Amplify Hosting so direct visits and refreshes on those paths load the app instead of returning 404:
+
+| Source address | Target address | Type |
+| --- | --- | --- |
+| `</^[^.]+$|\.(?!(css|gif|ico|jpg|js|png|txt|svg|woff|woff2|ttf|map|json|pdf)$)([^.]+$)/>` | `/index.html` | `200 (Rewrite)` |
+
 ## Pre-Deployment Checklist
 
 - `npm run lint` passes.
