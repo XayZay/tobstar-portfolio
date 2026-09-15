@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" fill="none">
+  <rect width="1200" height="630" fill="#0a0a0b"/>
+
+  <!-- hairline grid -->
+  <g stroke="#1f1f23" stroke-width="1">
+    <line x1="0" y1="157" x2="1200" y2="157"/>
+    <line x1="0" y1="315" x2="1200" y2="315"/>
+    <line x1="0" y1="472" x2="1200" y2="472"/>
+    <line x1="300" y1="0" x2="300" y2="630"/>
+    <line x1="600" y1="0" x2="600" y2="630"/>
+    <line x1="900" y1="0" x2="900" y2="630"/>
+  </g>
+
+  <!-- brand -->
+  <text x="80" y="104" font-family="JetBrains Mono, ui-monospace, monospace" font-size="20" font-weight="600" letter-spacing="5" fill="#ededef">TOBSTAR</text>
+  <circle cx="218" cy="97" r="4" fill="#5b8ff0"/>
+
+  <!-- headline -->
+  <text x="80" y="250" font-family="Inter, Helvetica, Arial, sans-serif" font-size="82" font-weight="500" letter-spacing="-3" fill="#ededef">The layer underneath</text>
+  <text x="80" y="340" font-family="Inter, Helvetica, Arial, sans-serif" font-size="82" font-weight="500" letter-spacing="-3" fill="#8a8a93">the product.</text>
+
+  <!-- rule -->
+  <line x1="80" y1="404" x2="1120" y2="404" stroke="#1f1f23" stroke-width="1"/>
+
+  <!-- disciplines -->
+  <text x="80" y="452" font-family="JetBrains Mono, ui-monospace, monospace" font-size="17" letter-spacing="3" fill="#8a8a93">
+    CLOUD  ·  INFRASTRUCTURE  ·  NETWORKING  ·  SECURITY  ·  BACKEND
+  </text>
+
+  <!-- name + availability -->
+  <text x="80" y="546" font-family="Inter, Helvetica, Arial, sans-serif" font-size="25" fill="#ededef">Oyeyemi Oluwatobiloba</text>
+  <circle cx="86" cy="586" r="4" fill="#5b8ff0"/>
+  <text x="102" y="592" font-family="JetBrains Mono, ui-monospace, monospace" font-size="15" letter-spacing="2" fill="#8a8a93">OPEN TO JUNIOR ENGINEERING ROLES</text>
+
+  <!-- topology motif, right -->
+  <g transform="translate(872, 452)">
+    <g stroke="#303036" stroke-width="1.5" stroke-linecap="round">
+      <path d="M0 40 H56"/>
+      <path d="M96 40 C 130 40, 134 6, 168 6"/>
+      <path d="M96 40 C 130 40, 134 74, 168 74"/>
+    </g>
+    <circle cx="0" cy="40" r="7" fill="#0a0a0b" stroke="#303036" stroke-width="1.5"/>
+    <rect x="56" y="22" width="40" height="36" rx="2" fill="#111113" stroke="#5b8ff0" stroke-width="1.5"/>
+    <rect x="168" y="-10" width="34" height="32" rx="2" fill="#0a0a0b" stroke="#303036" stroke-width="1.5"/>
+    <rect x="168" y="58" width="34" height="32" rx="2" fill="#0a0a0b" stroke="#303036" stroke-width="1.5"/>
+  </g>
+</svg>

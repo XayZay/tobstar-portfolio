@@ -1,0 +1,26 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>frame</title>
+    <style>
+      html, body { margin: 0; padding: 0; background: #444; }
+      iframe { border: 0; display: block; background: #0a0a0b; }
+    </style>
+  </head>
+  <body>
+    <script>
+      // Renders the site inside an iframe at an exact CSS width, so headless
+      // Chrome's minimum-window-width clamp can't distort the layout.
+      const p = new URLSearchParams(location.search);
+      const w = parseInt(p.get('w') || '390', 10);
+      const h = parseInt(p.get('h') || '2600', 10);
+      const path = p.get('path') || '/';
+      const f = document.createElement('iframe');
+      f.width = w;
+      f.height = h;
+      f.src = path;
+      document.body.appendChild(f);
+    </script>
+  </body>
+</html>

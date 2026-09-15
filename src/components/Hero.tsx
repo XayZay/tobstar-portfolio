@@ -1,76 +1,112 @@
-import { ArrowRight, FileText, Github, Linkedin, Mail } from 'lucide-react';
-import { education, metrics, profile } from '@/data/portfolio';
+import { currentFocus, profile } from "@/data/portfolio";
+import { Reveal } from "./Reveal";
+import { Topology } from "./Topology";
 
-export const Hero = () => {
-  const educationSummary = education[0]
-    ? `${education[0].degree} @ ${education[0].school} · ${education[0].end}`
-    : 'Cloud and network engineering portfolio';
+const DISCIPLINES = ["Cloud", "Infrastructure", "Networking", "Security", "Backend"];
 
-  return (
-    <section id="home" className="mx-auto min-h-[92vh] max-w-[980px] px-5 pb-24 pt-44 md:pt-56">
-      <div className="max-w-3xl">
-        <p className="mb-8 font-mono text-xs uppercase tracking-[0.32em] text-[#77736a]">
-          {profile.name}
-        </p>
+export const Hero = () => (
+  <section className="relative overflow-hidden pt-36 md:pt-44 lg:pt-52" aria-labelledby="hero-heading">
+    <div className="shell">
+      <div className="grid gap-16 lg:grid-cols-[1.15fr_0.85fr] lg:items-center lg:gap-12">
+        {/* ---- Left: the statement ---- */}
+        <div>
+          <Reveal>
+            <p className="meta flex flex-wrap items-center gap-x-3 gap-y-2 text-dim">
+              <span>{profile.name}</span>
+              <span aria-hidden="true" className="text-line-strong">
+                /
+              </span>
+              <span>{profile.location}</span>
+            </p>
+          </Reveal>
 
-        <h1 className="font-serif text-6xl leading-[0.92] tracking-normal text-[#1f1f1d] md:text-8xl">
-          Cloud Engineer
-        </h1>
-        <h2 className="mt-4 font-serif text-4xl leading-tight text-[#77736a] md:text-5xl">
-          Network Engineer
-        </h2>
+          <Reveal delay={80}>
+            <h1
+              id="hero-heading"
+              className="mt-7 text-display font-medium text-ink display-tight"
+            >
+              The layer
+              <br />
+              underneath
+              <br />
+              <span className="text-muted">the product.</span>
+            </h1>
+          </Reveal>
 
-        <p className="mt-8 max-w-2xl text-lg leading-8 text-[#605c54]">
-          {educationSummary}. Based in {profile.location}. Building cloud-backed tools, commissioning networks, and documenting infrastructure from lab to production.
-        </p>
+          {/* Discipline strip — the scannable version of the headline. */}
+          <Reveal delay={140}>
+            <ul className="mt-9 flex flex-wrap items-center gap-x-3 gap-y-2 border-y border-line py-4">
+              {DISCIPLINES.map((d, i) => (
+                <li key={d} className="meta flex items-center gap-3 text-muted">
+                  {d}
+                  {i < DISCIPLINES.length - 1 && (
+                    <span aria-hidden="true" className="text-line-strong">
+                      ·
+                    </span>
+                  )}
+                </li>
+              ))}
+            </ul>
+          </Reveal>
 
-        <p className="mt-6 font-mono text-sm leading-7 text-[#4c4a45]">
-          $ focus: aws · networking · firewalls · docker · infrastructure · security-aware systems
-        </p>
+          <Reveal delay={200}>
+            <p className="mt-9 max-w-measure text-lg leading-[1.7] text-ink md:text-xl md:leading-[1.65]">
+              {profile.positioning}
+            </p>
+            <p className="mt-5 max-w-measure text-[0.975rem] leading-[1.75] text-muted">
+              {profile.elaboration}
+            </p>
+          </Reveal>
 
-        <blockquote className="mt-8 border-l-2 border-[#0f766e] pl-5 font-serif text-lg italic text-[#1f1f1d]">
-          I like infrastructure work that proves itself: deployed, monitored, documented, and understandable under pressure.
-        </blockquote>
+          <Reveal delay={260}>
+            <div className="mt-11 flex flex-wrap items-center gap-x-8 gap-y-4">
+              <a
+                href="/#work"
+                className="group inline-flex items-center gap-2.5 border border-line-strong px-5 py-3 text-sm text-ink transition-colors duration-200 hover:border-accent hover:text-accent"
+              >
+                Selected work
+                <svg viewBox="0 0 16 16" className="h-3.5 w-3.5 transition-transform duration-300 ease-editorial group-hover:translate-x-1" fill="none" stroke="currentColor" strokeWidth="1.5">
+                  <path d="M3 8h10M9 4l4 4-4 4" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </a>
 
-        <div className="mt-10 flex flex-wrap gap-6 text-sm">
-          <a className="group inline-flex items-center gap-1 border-b border-[#1f1f1d] text-[#1f1f1d]" href="/now">
-            Now <ArrowRight size={14} className="transition group-hover:translate-x-1" />
-          </a>
-          <a className="group inline-flex items-center gap-1 text-[#605c54] transition hover:text-[#1f1f1d]" href="/projects">
-            Projects <ArrowRight size={14} className="transition group-hover:translate-x-1" />
-          </a>
-          <a className="group inline-flex items-center gap-1 text-[#605c54] transition hover:text-[#1f1f1d]" href="/uses">
-            Uses <ArrowRight size={14} className="transition group-hover:translate-x-1" />
-          </a>
-        </div>
-
-        <div className="mt-10 flex flex-wrap gap-3">
-          <a href={profile.github} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-full border border-[#d8d3c5] px-4 py-2 text-sm text-[#4c4a45] transition hover:border-[#1f1f1d] hover:text-[#1f1f1d]">
-            <Github size={16} /> GitHub
-          </a>
-          <a href={profile.linkedin} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-full border border-[#d8d3c5] px-4 py-2 text-sm text-[#4c4a45] transition hover:border-[#1f1f1d] hover:text-[#1f1f1d]">
-            <Linkedin size={16} /> LinkedIn
-          </a>
-          <a href={`mailto:${profile.email}`} className="inline-flex items-center gap-2 rounded-full border border-[#d8d3c5] px-4 py-2 text-sm text-[#4c4a45] transition hover:border-[#1f1f1d] hover:text-[#1f1f1d]">
-            <Mail size={16} /> Email
-          </a>
-          <a href={profile.resumeUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-full border border-[#d8d3c5] px-4 py-2 text-sm text-[#4c4a45] transition hover:border-[#1f1f1d] hover:text-[#1f1f1d]">
-            <FileText size={16} /> Resume
-          </a>
-        </div>
-      </div>
-
-      <div className="mt-28 border-t border-[#d8d3c5] pt-7">
-        <p className="mb-5 font-mono text-xs uppercase tracking-[0.32em] text-[#77736a]">Signal</p>
-        <div className="grid gap-5 md:grid-cols-3">
-          {metrics.map((metric) => (
-            <div key={metric.label}>
-              <div className="font-serif text-4xl text-[#1f1f1d]">{metric.value}</div>
-              <div className="mt-1 text-sm leading-6 text-[#605c54]">{metric.label}</div>
+              <a
+                href="/#contact"
+                className="link-draw text-sm text-muted transition-colors duration-200 hover:text-ink"
+              >
+                Get in touch
+              </a>
             </div>
-          ))}
+          </Reveal>
+
+          {/* Availability — present, but quiet. */}
+          <Reveal delay={320}>
+            <p className="meta mt-10 inline-flex items-center gap-2.5 text-muted">
+              <span aria-hidden="true" className="relative flex h-1.5 w-1.5">
+                <span className="status-dot absolute inline-flex h-full w-full rounded-full bg-accent" />
+              </span>
+              {profile.availability}
+            </p>
+          </Reveal>
         </div>
+
+        {/* ---- Right: the technical visual ---- */}
+        <Reveal delay={380} className="lg:pl-4">
+          <div className="relative">
+            <Topology className="h-auto w-full max-w-[460px] lg:max-w-none" />
+          </div>
+
+          <dl className="mt-8 border-t border-line pt-5">
+            <dt className="meta text-dim">{currentFocus.label}</dt>
+            <dd className="mt-2.5 text-[0.975rem] leading-relaxed text-ink">
+              {currentFocus.value}
+            </dd>
+            <dd className="mt-1.5 font-mono text-xs leading-relaxed text-muted">
+              {currentFocus.detail}
+            </dd>
+          </dl>
+        </Reveal>
       </div>
-    </section>
-  );
-};
+    </div>
+  </section>
+);

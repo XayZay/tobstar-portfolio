@@ -1,22 +1,21 @@
+import { About } from "@/components/About";
+import { Contact } from "@/components/Contact";
+import { Experience } from "@/components/Experience";
+import { Hero } from "@/components/Hero";
+import { Learning } from "@/components/Learning";
+import { SelectedWork } from "@/components/SelectedWork";
+import { Stack } from "@/components/Stack";
 
-import { Navigation } from '@/components/Navigation';
-import { Hero } from '@/components/Hero';
-import { About } from '@/components/About';
-import { Projects } from '@/components/Projects';
-import { Skills } from '@/components/Skills';
-import { Contact } from '@/components/Contact';
-
-const Index = () => {
-  return (
-    <div className="min-h-screen bg-[#f7f5ef] text-[#1f1f1d]">
-      <Navigation />
-      <Hero />
-      <About />
-      <Projects />
-      <Skills />
-      <Contact />
-    </div>
-  );
-};
+const Index = () => (
+  <>
+    <Hero />
+    <SelectedWork />
+    <Experience />
+    <Learning />
+    <Stack />
+    <About />
+    <Contact />
+  </>
+);
 
 export default Index;

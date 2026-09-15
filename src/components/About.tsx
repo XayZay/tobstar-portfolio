@@ -1,63 +1,73 @@
-import { education, experience, experienceHighlights, focusAreas } from '@/data/portfolio';
+import { about } from "@/data/portfolio";
+import { Reveal } from "./Reveal";
+import { Section } from "./Section";
 
-export const About = () => {
-  return (
-    <section id="about" className="mx-auto max-w-[980px] px-5 py-24">
-      <div className="border-t border-[#d8d3c5] pt-7">
-        <p className="mb-10 font-mono text-xs uppercase tracking-[0.32em] text-[#77736a]">Now</p>
-
-        <div className="grid gap-12 md:grid-cols-[0.9fr_1.1fr]">
-          <div>
-            <h2 className="font-serif text-4xl leading-tight text-[#1f1f1d] md:text-5xl">
-              Building cloud and network engineering depth before graduation.
-            </h2>
-            <p className="mt-6 text-lg leading-8 text-[#605c54]">
-              My current focus is infrastructure that has a real operating surface: AWS deployments, network commissioning, firewall labs, backend services, and documentation that makes systems easier to support.
+export const About = () => (
+  <Section id="about" index="05" label="About">
+    <div className="grid gap-14 lg:grid-cols-[1.2fr_0.8fr] lg:gap-20">
+      <div>
+        {about.paragraphs.map((paragraph, i) => (
+          <Reveal key={i} delay={i * 70}>
+            <p
+              className={
+                i === 0
+                  ? "max-w-measure text-xl leading-[1.65] text-ink md:text-2xl md:leading-[1.6]"
+                  : "mt-7 max-w-measure text-[0.975rem] leading-[1.8] text-muted"
+              }
+            >
+              {paragraph}
             </p>
-          </div>
-
-          <div className="space-y-7">
-            <div>
-              <p className="mb-3 font-mono text-xs uppercase tracking-[0.24em] text-[#77736a]">Education</p>
-              {education.map((item) => (
-                <div key={item.school} className="border-l border-[#d8d3c5] pl-5">
-                  <h3 className="font-serif text-2xl text-[#1f1f1d]">{item.school}</h3>
-                  <p className="mt-1 text-[#605c54]">{item.degree}</p>
-                  <p className="mt-1 font-mono text-sm text-[#77736a]">{item.start} - {item.end} · {item.location}</p>
-                </div>
-              ))}
-            </div>
-
-            <div>
-              <p className="mb-3 font-mono text-xs uppercase tracking-[0.24em] text-[#77736a]">Current Work</p>
-              {experience.map((item) => (
-                <div key={item.company} className="border-l border-[#d8d3c5] pl-5">
-                  <h3 className="font-serif text-2xl text-[#1f1f1d]">{item.role}</h3>
-                  <p className="mt-1 text-[#605c54]">{item.company} · {item.location}</p>
-                  <p className="mt-1 font-mono text-sm text-[#77736a]">{item.start} - {item.end}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        <div className="mt-16 grid gap-5 md:grid-cols-2">
-          {experienceHighlights.map((item) => (
-            <p key={item} className="border-t border-[#d8d3c5] pt-4 text-sm leading-7 text-[#4c4a45]">
-              {item}
-            </p>
-          ))}
-        </div>
-
-        <div className="mt-16 grid gap-8 md:grid-cols-3">
-          {focusAreas.map((feature) => (
-            <div key={feature.title} className="border-t border-[#d8d3c5] pt-5">
-              <h3 className="font-serif text-2xl text-[#1f1f1d]">{feature.title}</h3>
-              <p className="mt-3 text-sm leading-7 text-[#605c54]">{feature.description}</p>
-            </div>
-          ))}
-        </div>
+          </Reveal>
+        ))}
       </div>
-    </section>
-  );
-};
+
+      {/* Trajectory — the story as a vertical progression. */}
+      <Reveal delay={140}>
+        <div className="border-t border-line pt-7 lg:mt-2">
+          <p className="meta text-dim">Trajectory</p>
+
+          <ol className="mt-7">
+            {about.trajectory.map((step, i) => {
+              const isCurrent = step.state === "current";
+              const isLast = i === about.trajectory.length - 1;
+
+              return (
+                <li key={step.stage} className="relative flex gap-5 pb-7 last:pb-0">
+                  {/* rail */}
+                  {!isLast && (
+                    <span
+                      aria-hidden="true"
+                      className="absolute left-[3.5px] top-3 h-full w-px bg-line-strong"
+                    />
+                  )}
+
+                  <span className="relative mt-[7px] flex h-2 w-2 shrink-0">
+                    <span
+                      className={`h-2 w-2 rounded-full ${
+                        isCurrent ? "bg-accent" : "border border-line-strong bg-base"
+                      }`}
+                    />
+                    {isCurrent && (
+                      <span className="status-dot absolute inset-0 rounded-full bg-accent" />
+                    )}
+                  </span>
+
+                  <span>
+                    <span
+                      className={`block text-[0.95rem] ${isCurrent ? "text-ink" : "text-muted"}`}
+                    >
+                      {step.stage}
+                    </span>
+                    <span className="meta mt-1 block text-dim">
+                      {isCurrent ? "current focus" : step.state}
+                    </span>
+                  </span>
+                </li>
+              );
+            })}
+          </ol>
+        </div>
+      </Reveal>
+    </div>
+  </Section>
+);
