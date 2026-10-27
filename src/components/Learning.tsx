@@ -5,7 +5,7 @@ import { Section } from "./Section";
 export const Learning = () => (
   <Section
     id="learning"
-    index="05"
+    index="04"
     label="Learning"
     title="Actively building toward cloud engineering."
     intro="This section is study, not experience — and it's deliberately separate from the work above. It's what I'm working through now to get from a networking and security foundation to cloud infrastructure."

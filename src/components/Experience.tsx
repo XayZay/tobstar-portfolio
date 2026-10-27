@@ -5,7 +5,7 @@ import { Section } from "./Section";
 export const Experience = () => (
   <Section
     id="experience"
-    index="04"
+    index="03"
     label="Field experience"
     title="Hands on physical infrastructure."
     intro="An internship on paper — but the work was real network infrastructure: commissioning, configuration, migration and support in a live corporate environment. That's the part that matters."

@@ -32,7 +32,7 @@ export const FlowLabSection = ({ requestedScenarioId, onScenarioOpened }: FlowLa
   return (
     <Section
       id="flow-lab"
-      index="01"
+      index="02"
       label="Flow Lab"
       title="Follow the request."
       intro="Scripted traffic through architectures I built in hands-on cloud labs. The designs are real; the requests are simulated and the timings are illustrative."
