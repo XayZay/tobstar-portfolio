@@ -709,7 +709,7 @@ export const upcomingProjects: UpcomingProject[] = [
 export const skillGroups = [
   {
     label: "Cloud & Infrastructure",
-    items: ["AWS EC2", "AWS S3", "IAM", "VPC", "Lambda", "DynamoDB", "CloudWatch", "Docker", "Nginx"],
+    items: ["AWS Console", "Terraform", "AWS CLI", "Docker", "Nginx"],
   },
   {
     label: "Networking",
