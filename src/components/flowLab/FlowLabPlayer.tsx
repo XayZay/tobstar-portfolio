@@ -330,9 +330,9 @@ const FlowLabPlayer = ({ requestedScenarioId, onScenarioOpened }: FlowLabPlayerP
               id="flow-select"
               value={flow.id}
               onChange={(event) => changeFlow(event.target.value)}
-              className="mt-3 min-h-11 w-full border border-line-strong bg-base px-3 text-sm text-ink"
+              className="mt-3 min-h-11 w-full border border-line-strong bg-base px-3 text-sm text-ink focus-visible:outline-ink"
             >
-              {scenario.flows.map((item) => <option key={item.id} value={item.id}>{item.title}</option>)}
+              {scenario.flows.map((item) => <option className="bg-base text-ink" key={item.id} value={item.id}>{item.title}</option>)}
             </select>
 
             <div className="mt-7 flex flex-wrap gap-2">

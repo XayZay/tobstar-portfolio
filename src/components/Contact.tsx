@@ -6,7 +6,7 @@ export const Contact = () => (
     <div className="shell py-20 md:py-28 lg:py-36">
       <Reveal>
         <p className="meta flex items-center gap-2 text-dim">
-          <span className="text-accent">07</span>
+          <span className="text-accent">09</span>
           <span aria-hidden="true" className="text-line-strong">
             /
           </span>

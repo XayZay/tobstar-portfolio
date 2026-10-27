@@ -5,7 +5,7 @@ import { Section } from "./Section";
 export const Stack = () => (
   <Section
     id="stack"
-    index="05"
+    index="07"
     label="Stack"
     title="What I work with."
     intro="Grouped by domain. No proficiency scores — they don't mean anything, and the projects above show the actual depth."

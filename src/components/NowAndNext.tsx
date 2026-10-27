@@ -11,7 +11,7 @@ const STATUS_LABELS = {
 export const NowAndNext = () => (
   <Section
     id="now-and-next"
-    index="04"
+    index="06"
     label="Now & Next"
     title="Ideas I’m exploring."
   >

@@ -130,15 +130,6 @@ export const Hero = ({ onFrameChange, onExplore }: HeroProps) => {
             </div>
           </Reveal>
 
-          {/* Availability — present, but quiet. */}
-          <Reveal delay={320}>
-            <p className="meta mt-10 inline-flex items-center gap-2.5 text-muted">
-              <span aria-hidden="true" className="relative flex h-1.5 w-1.5">
-                <span className="status-dot absolute inline-flex h-full w-full rounded-full bg-accent" />
-              </span>
-              {profile.availability}
-            </p>
-          </Reveal>
         </div>
 
         {/* ---- Right: the technical visual ---- */}
