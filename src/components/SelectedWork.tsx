@@ -135,7 +135,7 @@ export const SelectedWork = () => {
   return (
     <Section
       id="work"
-      index="01"
+      index="02"
       label="Selected work"
       title="Things I built, and how they run."
       intro="Six projects, ordered deliberately. The first one is the one I'd want to talk about — it's where the infrastructure thinking is."

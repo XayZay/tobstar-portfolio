@@ -626,6 +626,83 @@ export const education = [
 ] as const;
 
 /* ---------------------------------------------------------------------------
+   Now & Next — ideas and projects in progress, not completed portfolio work.
+   --------------------------------------------------------------------------- */
+
+export type UpcomingProjectStatus = "idea" | "designing" | "building";
+
+export interface UpcomingProject {
+  id: string;
+  title: string;
+  problem: string;
+  approach: string;
+  detail: string[];
+  tags?: string[];
+  status: UpcomingProjectStatus;
+  openQuestions?: string[];
+}
+
+export const upcomingProjects: UpcomingProject[] = [
+  {
+    id: "reading-assistant",
+    title: "Reading assistant for complicated pages",
+    problem:
+      "Dense technical articles are hard to follow in one pass, and I end up pasting sections into an AI to get them explained.",
+    approach:
+      "A Chrome extension that rewrites or annotates the current page at a reading level I choose, with the original text one click away.",
+    detail: [
+      "The idea is to make a dense page easier to work through without losing the source text. A reader could choose a reading level, then use a rewritten or annotated view to understand the material in smaller steps.",
+      "The original page stays close at hand: the simplified view should help explain the source, while leaving the source available for checking terminology and context.",
+    ],
+    status: "idea",
+  },
+  {
+    id: "cv-tailoring-agent",
+    title: "CV tailoring agent",
+    problem: "Tailoring a CV to every role by hand is slow and inconsistent.",
+    approach:
+      "A script that takes a job title and posting link, reads my current CV and portfolio, and produces a version tailored to that role. I review it before anything is sent; drafting the email through Gmail is a possible extension.",
+    detail: [
+      "The proposed workflow starts with a role title and job posting, then uses the existing CV and portfolio as source material for a role-specific draft. The aim is to make tailoring less repetitive while keeping the submitted information grounded in those sources.",
+      "The result remains a draft for human review. Preparing an email through Gmail is only a possible extension; the core idea does not send applications automatically.",
+    ],
+    status: "idea",
+  },
+  {
+    id: "weekly-notes-digest",
+    title: "Weekly notes and tasks digest",
+    problem: "My tasks and notes are scattered across Google Keep, Apple Notes and Notion.",
+    approach:
+      "A worker that gathers them, groups related items, links them to earlier notes, and emails a weekly summary that includes what was completed.",
+    detail: [
+      "This idea brings tasks and notes from the listed apps into a weekly digest. Related items would be grouped together and linked with earlier notes, so the summary can show context as well as what was completed.",
+      "The open questions are central to the design: whether the apps expose suitable APIs, and whether sending private notes through an AI service would be appropriate.",
+    ],
+    status: "idea",
+    openQuestions: [
+      "Do these apps expose APIs that make this possible?",
+      "Does passing my notes through an AI service raise privacy concerns?",
+    ],
+  },
+  {
+    id: "aws-documentation-assistant",
+    title: "AWS documentation assistant (RAG)",
+    problem: "AWS documentation is vast and changes often.",
+    approach:
+      "Fetch and index the documentation once a day in the background, then answer questions in a chat interface, with sources.",
+    detail: [
+      "The proposed assistant would refresh an index of AWS documentation in the background, then use that material to answer questions in a chat interface and point readers to its sources.",
+      "Two design questions remain open: how document updates should affect the index, and how much depth an answer should provide for different questions.",
+    ],
+    status: "idea",
+    openQuestions: [
+      "When a document changes, does the whole model need to be retrained?",
+      "How should the depth of an answer adapt to the question asked?",
+    ],
+  },
+];
+
+/* ---------------------------------------------------------------------------
    Skills. Categories, no proficiency bars, no percentages.
    --------------------------------------------------------------------------- */
 
