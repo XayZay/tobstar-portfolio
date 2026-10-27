@@ -2,10 +2,11 @@ import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react
 import { Footer } from "./components/Footer";
 import { Navigation } from "./components/Navigation";
 import { Terminal } from "./components/Terminal";
-import { projects, profile } from "./data/portfolio";
+import { projects, profile, upcomingProjects } from "./data/portfolio";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import ProjectDetail from "./pages/ProjectDetail";
+import UpcomingProjectDetail from "./pages/UpcomingProjectDetail";
 
 const normalize = (path: string) => path.replace(/\/+$/, "") || "/";
 
@@ -28,6 +29,18 @@ const resolve = (path: string) => {
         element: <ProjectDetail project={project} />,
         title: `${project.title} — ${profile.name}`,
         description: project.summary.slice(0, 180),
+      };
+    }
+  }
+
+  const ideaMatch = path.match(/^\/ideas\/([\w-]+)$/);
+  if (ideaMatch) {
+    const idea = upcomingProjects.find((item) => item.id === ideaMatch[1]);
+    if (idea) {
+      return {
+        element: <UpcomingProjectDetail project={idea} />,
+        title: `${idea.title} — Now & Next — ${profile.name}`,
+        description: idea.problem.slice(0, 180),
       };
     }
   }

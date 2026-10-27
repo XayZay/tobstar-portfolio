@@ -3,7 +3,7 @@ import { Reveal } from "./Reveal";
 import { Section } from "./Section";
 
 export const About = () => (
-  <Section id="about" index="05" label="About">
+  <Section id="about" index="06" label="About">
     <div className="grid gap-14 lg:grid-cols-[1.2fr_0.8fr] lg:gap-20">
       <div>
         {about.paragraphs.map((paragraph, i) => (
