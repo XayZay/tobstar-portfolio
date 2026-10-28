@@ -18,13 +18,12 @@ export const Footer = ({ onOpenTerminal }: { onOpenTerminal?: () => void }) => (
           <button
             type="button"
             onClick={onOpenTerminal}
-            className="meta hidden text-dim transition-colors hover:text-accent md:inline"
+            className="meta inline-flex min-h-11 items-center gap-2 border border-line-strong px-3 py-2 text-dim transition-colors hover:border-accent hover:text-accent"
           >
-            Press{" "}
-            <kbd className="border border-line px-1.5 py-0.5 font-mono text-[0.625rem] text-muted">
+            Open terminal{" "}
+            <kbd aria-hidden="true" className="border border-line px-1.5 py-0.5 font-mono text-[0.625rem] text-muted">
               `
-            </kbd>{" "}
-            for terminal
+            </kbd>
           </button>
         )}
         <span className="meta text-dim">© {new Date().getFullYear()}</span>

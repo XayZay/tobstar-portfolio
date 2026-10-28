@@ -67,8 +67,8 @@ export const profile = {
 
 export const navItems = [
   { label: "Work", href: "/#work" },
+  { label: "Flow Lab", href: "/#flow-lab" },
   { label: "Experience", href: "/#experience" },
-  { label: "Learning", href: "/#learning" },
   { label: "About", href: "/#about" },
   { label: "Contact", href: "/#contact" },
 ] as const;
@@ -717,9 +717,6 @@ export const skillGroups = [
       "Huawei switches",
       "Cisco switches",
       "pfSense",
-      "Wireshark",
-      "VirtualBox",
-      "VMware",
     ],
   },
   {
@@ -727,8 +724,6 @@ export const skillGroups = [
     items: [
       "Kali Linux",
       "Metasploit Framework",
-      "pfSense",
-      "Wireshark",
       "Metasploitable 2",
       "Windows Server 2022",
       "Windows 11",
@@ -749,8 +744,8 @@ export const skillGroups = [
     ],
   },
   {
-    label: "Tools",
-    items: ["Wireshark", "Snipe-IT", "AUGIX MSP Net Portal", "VirtualBox", "VMware", "Windows Server"],
+    label: "Operations & Lab",
+    items: ["Wireshark", "Snipe-IT", "AUGIX MSP Net Portal", "VirtualBox", "VMware"],
   },
 ] as const;
 
