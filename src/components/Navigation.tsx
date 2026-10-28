@@ -63,7 +63,7 @@ export const Navigation = ({ onOpenTerminal }: { onOpenTerminal?: () => void }) 
           />
         </a>
 
-        <div className="hidden items-center gap-9 md:flex">
+        <div className="hidden items-center gap-5 md:flex lg:gap-8">
           {navItems.map((item) => (
             <a
               key={item.label}
@@ -73,6 +73,15 @@ export const Navigation = ({ onOpenTerminal }: { onOpenTerminal?: () => void }) 
               {item.label}
             </a>
           ))}
+          {onOpenTerminal && (
+            <button
+              type="button"
+              onClick={onOpenTerminal}
+              className="link-draw meta text-muted transition-colors duration-200 hover:text-ink"
+            >
+              Terminal
+            </button>
+          )}
           <a
             href={profile.resumeUrl}
             target="_blank"

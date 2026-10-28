@@ -1,6 +1,6 @@
 import { profile } from "@/data/portfolio";
 
-export const Footer = ({ onOpenTerminal }: { onOpenTerminal?: () => void }) => (
+export const Footer = () => (
   <footer className="border-t border-line">
     <div className="shell flex flex-wrap items-center justify-between gap-x-8 gap-y-5 py-9">
       <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
@@ -14,18 +14,6 @@ export const Footer = ({ onOpenTerminal }: { onOpenTerminal?: () => void }) => (
       </div>
 
       <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
-        {onOpenTerminal && (
-          <button
-            type="button"
-            onClick={onOpenTerminal}
-            className="meta inline-flex min-h-11 items-center gap-2 border border-line-strong px-3 py-2 text-dim transition-colors hover:border-accent hover:text-accent"
-          >
-            Open terminal{" "}
-            <kbd aria-hidden="true" className="border border-line px-1.5 py-0.5 font-mono text-[0.625rem] text-muted">
-              `
-            </kbd>
-          </button>
-        )}
         <span className="meta text-dim">© {new Date().getFullYear()}</span>
       </div>
     </div>

@@ -154,25 +154,6 @@ const AppShell = () => {
     // Runs once, on mount only.
   }, []);
 
-  // Easter egg: backtick opens the terminal, unless the user is typing.
-  useEffect(() => {
-    const onKey = (e: KeyboardEvent) => {
-      const el = document.activeElement;
-      const typing =
-        el instanceof HTMLInputElement ||
-        el instanceof HTMLTextAreaElement ||
-        (el instanceof HTMLElement && el.isContentEditable);
-
-      if (e.key === "`" && !typing) {
-        e.preventDefault();
-        setTerminalOpen((v) => !v);
-      }
-    };
-
-    document.addEventListener("keydown", onKey);
-    return () => document.removeEventListener("keydown", onKey);
-  }, []);
-
   const openTerminal = useCallback(() => setTerminalOpen(true), []);
 
   return (
@@ -186,7 +167,7 @@ const AppShell = () => {
 
       <Navigation onOpenTerminal={openTerminal} />
       <main id="main">{element}</main>
-      <Footer onOpenTerminal={openTerminal} />
+      <Footer />
       <Terminal open={terminalOpen} onClose={() => setTerminalOpen(false)} />
     </>
   );

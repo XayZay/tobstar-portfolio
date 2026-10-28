@@ -60,7 +60,7 @@ export const profile = {
   availability: "Open to junior engineering roles",
   /** Hero supporting copy. Specific, not aspirational filler. */
   positioning:
-    "Junior engineer focused on cloud infrastructure, with a foundation in networking and security.",
+    "Engineer focused on cloud engineering and architecture.",
   elaboration:
     "I started at the physical layer — cabling, switches, firewalls — and worked upward into the systems that run on top of them. Most of what I build has to run somewhere, so I spend my time on how it runs.",
 } as const;
