@@ -4,8 +4,6 @@ import { useEffect, useRef, useState, type FocusEvent } from "react";
 import { Reveal } from "./Reveal";
 import { Topology } from "./Topology";
 
-const DISCIPLINES = ["Cloud", "Infrastructure", "Networking", "Security", "Backend"];
-
 interface HeroProps {
   onFrameChange?: (scenarioId: string) => void;
   onExplore?: () => void;
@@ -56,7 +54,7 @@ export const Hero = ({ onFrameChange, onExplore }: HeroProps) => {
   };
 
   return (
-  <section className="relative overflow-hidden pt-36 md:pt-44 lg:pt-52" aria-labelledby="hero-heading">
+  <section className="relative overflow-hidden pt-28 md:pt-36 lg:pt-40" aria-labelledby="hero-heading">
     <div className="shell">
       <div className="grid gap-16 lg:grid-cols-[1.15fr_0.85fr] lg:items-center lg:gap-12">
         {/* ---- Left: the statement ---- */}
@@ -74,43 +72,25 @@ export const Hero = ({ onFrameChange, onExplore }: HeroProps) => {
           <Reveal delay={80}>
             <h1
               id="hero-heading"
-              className="mt-7 text-display font-medium text-ink display-tight"
+              className="mt-6 max-w-[12ch] text-[clamp(2.8rem,7vw,5.25rem)] font-medium leading-[0.98] text-ink display-tight md:mt-8"
             >
-              The layer
+              Cloud
               <br />
-              underneath
-              <br />
-              <span className="text-muted">the product.</span>
+              infrastructure.
             </h1>
           </Reveal>
 
-          {/* Discipline strip — the scannable version of the headline. */}
-          <Reveal delay={140}>
-            <ul className="mt-9 flex flex-wrap items-center gap-x-3 gap-y-2 border-y border-line py-4">
-              {DISCIPLINES.map((d, i) => (
-                <li key={d} className="meta flex items-center gap-3 text-muted">
-                  {d}
-                  {i < DISCIPLINES.length - 1 && (
-                    <span aria-hidden="true" className="text-line-strong">
-                      ·
-                    </span>
-                  )}
-                </li>
-              ))}
-            </ul>
-          </Reveal>
-
           <Reveal delay={200}>
-            <p className="mt-9 max-w-measure text-lg leading-[1.7] text-ink md:text-xl md:leading-[1.65]">
+            <p className="mt-6 max-w-measure text-lg leading-[1.6] text-ink md:mt-7 md:text-xl md:leading-[1.55]">
               {profile.positioning}
             </p>
-            <p className="mt-5 max-w-measure text-[0.975rem] leading-[1.75] text-muted">
+            <p className="mt-4 max-w-measure text-[0.975rem] leading-[1.7] text-muted">
               {profile.elaboration}
             </p>
           </Reveal>
 
           <Reveal delay={260}>
-            <div className="mt-11 flex flex-wrap items-center gap-x-8 gap-y-4">
+            <div className="mt-7 flex flex-wrap items-center gap-x-8 gap-y-4 md:mt-8">
               <a
                 href="/#work"
                 className="group inline-flex items-center gap-2.5 border border-line-strong px-5 py-3 text-sm text-ink transition-colors duration-200 hover:border-accent hover:text-accent"

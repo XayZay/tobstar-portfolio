@@ -88,8 +88,7 @@
     font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
     font-size: 0.6875rem;
     line-height: 1.2;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
+    letter-spacing: 0.04em;
   }
 
   /* Underline that draws in from the left on hover/focus. */
