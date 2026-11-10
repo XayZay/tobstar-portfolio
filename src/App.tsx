@@ -7,6 +7,7 @@ import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import ProjectDetail from "./pages/ProjectDetail";
 import UpcomingProjectDetail from "./pages/UpcomingProjectDetail";
+import { AboutPage, FieldNotesPage, HackathonsPage, LabPage, WorkPage } from "./pages/Destinations";
 
 const normalize = (path: string) => path.replace(/\/+$/, "") || "/";
 
@@ -20,6 +21,16 @@ const resolve = (path: string) => {
         "Junior engineer working across cloud infrastructure, networking, backend systems and security. Networking and cybersecurity foundations, extending into AWS and infrastructure engineering.",
     };
   }
+
+  const destinations = {
+    "/work": { element: <WorkPage />, title: `Work — ${profile.name}`, description: "Projects and systems built by Oyeyemi Oluwatobiloba." },
+    "/hackathons": { element: <HackathonsPage />, title: `Hackathons — ${profile.name}`, description: "Hackathon projects by Oyeyemi Oluwatobiloba." },
+    "/lab": { element: <LabPage />, title: `Flow Lab — ${profile.name}`, description: "Interactive cloud architecture scenarios." },
+    "/field-notes": { element: <FieldNotesPage />, title: `Field Notes — ${profile.name}`, description: "Learning, tools and project ideas." },
+    "/about": { element: <AboutPage />, title: `About — ${profile.name}`, description: "Background and contact details for Oyeyemi Oluwatobiloba." },
+  } as const;
+
+  if (path in destinations) return destinations[path as keyof typeof destinations];
 
   const match = path.match(/^\/projects\/([\w-]+)$/);
   if (match) {

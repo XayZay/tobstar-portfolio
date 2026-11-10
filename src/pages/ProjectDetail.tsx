@@ -20,7 +20,7 @@ const ProjectDetail = ({ project }: { project: Project }) => {
       <header className="shell">
         <Reveal>
           <a
-            href="/#work"
+            href="/work"
             className="group meta inline-flex items-center gap-2 text-dim transition-colors hover:text-accent"
           >
             <svg viewBox="0 0 16 16" className="h-3 w-3 transition-transform duration-300 ease-editorial group-hover:-translate-x-1" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
@@ -37,6 +37,7 @@ const ProjectDetail = ({ project }: { project: Project }) => {
             <span>{project.category}</span>
             <span aria-hidden="true" className="text-line-strong">/</span>
             <span>{project.year}</span>
+            {project.hackathon && <span className="rounded-full border border-accent/40 px-2 py-1 text-accent">Built for {project.hackathon}</span>}
           </p>
         </Reveal>
 

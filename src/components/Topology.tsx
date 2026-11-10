@@ -6,7 +6,7 @@ import type { HeroFrame } from "@/data/flowLab/heroFrames";
  * generic role bindings from the small hero frame module, never live resources.
  */
 const LABEL = {
-  fontFamily: '"JetBrains Mono", ui-monospace, monospace',
+  fontFamily: '"DM Mono", ui-monospace, monospace',
   fontSize: 9,
   letterSpacing: 1.4,
   textAnchor: "middle" as const,

@@ -54,12 +54,12 @@ export const Navigation = ({ onOpenTerminal }: { onOpenTerminal?: () => void }) 
           className="group inline-flex items-baseline gap-2"
           aria-label={`${profile.brand} — home`}
         >
-          <span className="font-mono text-sm font-semibold tracking-[0.2em] text-ink">
+          <span className="font-mono text-sm font-medium tracking-[0.08em] text-ink">
             {profile.brand}
           </span>
           <span
             aria-hidden="true"
-            className="h-1 w-1 translate-y-[-2px] rounded-full bg-accent transition-transform duration-300 group-hover:scale-150"
+            className="h-1.5 w-1.5 translate-y-[-2px] rounded-full bg-signal transition-transform duration-300 group-hover:scale-150"
           />
         </a>
 
@@ -68,7 +68,7 @@ export const Navigation = ({ onOpenTerminal }: { onOpenTerminal?: () => void }) 
             <a
               key={item.label}
               href={item.href}
-              className="link-draw meta text-muted transition-colors duration-200 hover:text-ink"
+              className="link-draw text-sm text-muted transition-colors duration-200 hover:text-ink"
             >
               {item.label}
             </a>
@@ -77,7 +77,7 @@ export const Navigation = ({ onOpenTerminal }: { onOpenTerminal?: () => void }) 
             <button
               type="button"
               onClick={onOpenTerminal}
-              className="link-draw meta text-muted transition-colors duration-200 hover:text-ink"
+              className="link-draw text-sm text-muted transition-colors duration-200 hover:text-ink"
             >
               Terminal
             </button>
@@ -86,7 +86,7 @@ export const Navigation = ({ onOpenTerminal }: { onOpenTerminal?: () => void }) 
             href={profile.resumeUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="meta border border-line-strong px-3 py-2 text-ink transition-colors duration-200 hover:border-accent hover:text-accent"
+            className="rounded-full border border-line-strong px-4 py-2 text-sm font-medium text-ink transition-colors duration-200 hover:border-accent hover:text-accent"
           >
             Résumé
           </a>

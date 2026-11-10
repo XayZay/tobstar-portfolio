@@ -51,8 +51,8 @@ export const Learning = () => (
             {education.map((item) => (
               <div key={item.school} className="mt-4">
                 <h3 className="text-xl font-medium text-ink">{item.school}</h3>
-                <p className="mt-2 text-sm text-muted">{item.degree}</p>
-                <p className="meta mt-2.5 text-dim">
+                <p className="mt-2 text-base text-muted">{item.degree}</p>
+                <p className="mt-2.5 text-sm text-muted">
                   {item.location} · {item.end}
                 </p>
               </div>

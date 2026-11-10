@@ -20,10 +20,11 @@ export default {
         muted: "rgb(var(--muted) / <alpha-value>)",
         dim: "rgb(var(--dim) / <alpha-value>)",
         accent: "rgb(var(--accent) / <alpha-value>)",
+        signal: "rgb(var(--signal) / <alpha-value>)",
       },
       fontFamily: {
-        sans: ["Inter", "ui-sans-serif", "system-ui", "-apple-system", "Segoe UI", "sans-serif"],
-        mono: ["JetBrains Mono", "ui-monospace", "SFMono-Regular", "Menlo", "monospace"],
+        sans: ["DM Sans", "ui-sans-serif", "system-ui", "sans-serif"],
+        mono: ["DM Mono", "ui-monospace", "SFMono-Regular", "Menlo", "monospace"],
       },
       fontSize: {
         // Fluid display sizes so the hero never needs breakpoint juggling.
@@ -32,7 +33,7 @@ export default {
         section: ["clamp(1.75rem, 3.6vw, 2.75rem)", { lineHeight: "1.12", letterSpacing: "-0.025em" }],
       },
       maxWidth: {
-        shell: "1240px",
+        shell: "1600px",
         measure: "68ch",
       },
       transitionTimingFunction: {

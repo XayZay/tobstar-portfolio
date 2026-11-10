@@ -30,6 +30,8 @@ export interface Project {
   highlights: string[];
   stack: string[];
   github: string | null;
+  /** Event context for work first developed at a hackathon. */
+  hackathon?: string;
   /** Present only for projects with a full case-study page. */
   caseStudy?: {
     problem: string;
@@ -66,11 +68,11 @@ export const profile = {
 } as const;
 
 export const navItems = [
-  { label: "Work", href: "/#work" },
-  { label: "Flow Lab", href: "/#flow-lab" },
-  { label: "Experience", href: "/#experience" },
-  { label: "About", href: "/#about" },
-  { label: "Contact", href: "/#contact" },
+  { label: "Work", href: "/work" },
+  { label: "Hackathons", href: "/hackathons" },
+  { label: "Flow Lab", href: "/lab" },
+  { label: "Field Notes", href: "/field-notes" },
+  { label: "About", href: "/about" },
 ] as const;
 
 /** Hero status strip. Factual, present-tense. */
@@ -195,6 +197,7 @@ export const projects: Project[] = [
       "WhatsApp API",
     ],
     github: "https://github.com/XayZay/GhostPay_BackendClient",
+    hackathon: "Kora Hackathon",
     caseStudy: {
       problem:
         "Voice is a forgiving interface for people and an unforgiving one for software. A spoken instruction arrives as audio, not structured data, and the thing it's asking for is a payment — which is exactly the category of operation where an ambiguous parse or an unverified callback is unacceptable.",
@@ -256,8 +259,38 @@ export const projects: Project[] = [
     },
   },
   {
-    slug: "pfsense-lab",
+    slug: "crossroute",
     index: "03",
+    title: "CrossRoute",
+    subtitle: "Dynamic escrow and cross-border payout MVP",
+    category: "Product engineering / Payments",
+    tier: "featured",
+    year: "2026",
+    summary: "A Next.js MVP foundation for a role-aware platform that models escrow, milestone releases, scope changes and payout routing for international clients and Nigerian providers.",
+    highlights: ["Client and provider journeys with role-aware demo sessions", "Project, milestone and change-order domain flows", "Mock-backed funding, payout timing and notification paths", "API route boundaries for the product workflows"],
+    stack: ["Next.js 14", "TypeScript", "Tailwind CSS", "Server Actions", "Mock domain layer"],
+    github: "https://github.com/XayZay/ENYATA_BUILDATHON",
+    hackathon: "Interswitch × Enyata Buildathon",
+    caseStudy: {
+      problem: "A cross-border client and a Nigerian provider need more than a payment button: they need a shared way to fund work, account for a scope change, release a milestone and understand payout options.",
+      approach: "I helped build a locally runnable MVP foundation around client and provider roles. Its domain layer models projects, milestones, change orders, transactions, payouts and notifications; the implementation uses deterministic demo data while external integrations remain deliberately isolated.",
+      diagram: { caption: "The implemented MVP models the product flow locally; payment and rate integrations remain explicit boundaries.", layers: [{ label: "Roles", nodes: ["Client", "Provider", "Role-aware demo sessions"] }, { label: "Project flow", nodes: ["Project", "Milestones", "Change orders"] }, { label: "Domain layer", nodes: ["Transactions", "Payout requests", "Notifications"] }, { label: "Integration boundary", nodes: ["Interswitch sandbox", "FX-rate providers", "Mocked in MVP"] }] },
+      sections: [
+        { label: "Role-aware entry", body: "The landing and demo authentication flow separates client and provider journeys so the dashboard can show actions relevant to each role." },
+        { label: "Escrow model", body: "Projects are structured around milestones and an explicit state flow. A change order is represented as a record that can move through approval before a project returns to its active state." },
+        { label: "Demo domain layer", body: "Projects, milestones, change orders, transactions, payouts and notifications are held in an in-memory domain layer shared by server actions and API routes, keeping the demo flows consistent without third-party credentials." },
+        { label: "Integration boundary", body: "The repository defines seams for Supabase, rate sources and Interswitch sandbox calls. In the current MVP those are stubs or documented next steps, so data resets on restart and external calls are not presented as live." },
+      ],
+      decisions: [
+        { question: "Why keep the MVP mock-backed?", answer: "It lets the client and provider flows be demonstrated locally while the authentication, persistence, rate and payment integrations are kept as explicit next steps rather than implied as complete." },
+        { question: "Why make a change order central?", answer: "Scope changes affect both the work and the amount held in escrow. Modelling the approval path makes that relationship visible instead of treating a change as an informal message outside the product." },
+      ],
+      learned: ["A payment product needs a clear domain model before it needs a polished checkout surface.", "Role-aware journeys make the same project data useful to two people with different responsibilities."],
+    },
+  },
+  {
+    slug: "pfsense-lab",
+    index: "04",
     title: "pfSense Firewall Lab",
     subtitle: "Multi-VM segmented network",
     category: "Networking / Security",
@@ -325,7 +358,7 @@ export const projects: Project[] = [
   },
   {
     slug: "file-converter",
-    index: "04",
+    index: "05",
     title: "File Converter",
     subtitle: "Offline universal conversion CLI",
     category: "Software Engineering / Tooling",
@@ -384,7 +417,7 @@ export const projects: Project[] = [
   },
   {
     slug: "windows-pentest-lab",
-    index: "05",
+    index: "06",
     title: "Windows VM Penetration Test",
     subtitle: "Privilege escalation & defense evasion",
     category: "Offensive Security / Lab",
@@ -440,7 +473,7 @@ export const projects: Project[] = [
   },
   {
     slug: "keylogger-research",
-    index: "06",
+    index: "07",
     title: "Keystroke Monitor",
     subtitle: "Ethical research build",
     category: "Security Research / Lab",
@@ -497,14 +530,8 @@ export const additionalWork = [
     context: "Final year research · Covenant University",
     note: "Multi-class network intrusion detection using a graph neural network that incorporates port awareness and edge features.",
     stack: ["Python", "Graph neural networks", "Network intrusion detection"],
-    github: null,
-  },
-  {
-    title: "CrossRoute",
-    context: "Interswitch × Enyata buildathon",
-    note: "Next.js MVP foundation for escrow and cross-border payout routing, covering funding flows, milestone release logic and payout routing.",
-    stack: ["Next.js", "TypeScript", "Tailwind CSS"],
-    github: "https://github.com/XayZay/ENYATA_BUILDATHON",
+    paper: "/documents/OYEYEMI_OLUWATOBILOBA_22CG031946_PAE_GNN_FYP_REPORT_FINAL_1.pdf",
+    github: "https://github.com/XayZay/Port-Aware-Edge-Feature-Enhanced-Graph-Neural-Network-for-Multi-Class-Network-Intrusion-Detection",
   },
 ];
 
@@ -621,7 +648,7 @@ export const education = [
     school: "Covenant University",
     location: "Ota, Ogun State",
     degree: "B.Sc. Computer Science",
-    end: "Expected August 2026",
+    end: "September 2022 – October 2026",
   },
 ] as const;
 

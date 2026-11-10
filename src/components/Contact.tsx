@@ -4,20 +4,12 @@ import { Reveal } from "./Reveal";
 export const Contact = () => (
   <section id="contact" className="scroll-mt-24 border-t border-line" aria-labelledby="contact-heading">
     <div className="shell py-20 md:py-28 lg:py-36">
-      <Reveal>
-        <p className="meta flex items-center gap-2 text-dim">
-          <span className="text-accent">08</span>
-          <span aria-hidden="true" className="text-line-strong">
-            /
-          </span>
-          <span>Contact</span>
-        </p>
-      </Reveal>
+      <Reveal><p className="text-sm font-medium text-accent">Contact</p></Reveal>
 
       <Reveal delay={60}>
         <h2
           id="contact-heading"
-          className="mt-10 max-w-[16ch] text-display-sm font-medium text-ink display-tight"
+          className="mt-5 max-w-[16ch] text-display-sm font-semibold text-ink display-tight"
         >
           {contact.heading}
         </h2>

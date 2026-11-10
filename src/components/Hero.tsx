@@ -54,88 +54,90 @@ export const Hero = ({ onFrameChange, onExplore }: HeroProps) => {
   };
 
   return (
-  <section className="relative overflow-hidden pt-28 md:pt-36 lg:pt-40" aria-labelledby="hero-heading">
-    <div className="shell">
-      <div className="grid gap-16 lg:grid-cols-[1.15fr_0.85fr] lg:items-center lg:gap-12">
-        {/* ---- Left: the statement ---- */}
-        <div>
+  <section className="hero-field relative overflow-hidden border-b border-line pt-24 md:pt-28 lg:pt-32" aria-labelledby="hero-heading">
+    <div className="shell pb-14 md:pb-20">
+      <div className="grid gap-12 lg:grid-cols-[0.92fr_1.08fr] lg:gap-16">
+        <div className="lg:pt-10">
           <Reveal>
-            <p className="meta flex flex-wrap items-center gap-x-3 gap-y-2 text-dim">
-              <span>{profile.name}</span>
-              <span aria-hidden="true" className="text-line-strong">
-                /
-              </span>
-              <span>{profile.location}</span>
+            <p className="text-sm font-medium text-muted">
+              {profile.name} <span aria-hidden="true" className="mx-2 text-accent">/</span> {profile.location}
             </p>
           </Reveal>
 
           <Reveal delay={80}>
             <h1
               id="hero-heading"
-              className="mt-6 max-w-[12ch] text-[clamp(2.8rem,7vw,5.25rem)] font-medium leading-[0.98] text-ink display-tight md:mt-8"
+              className="mt-6 max-w-[10ch] text-[clamp(3.25rem,8vw,6.8rem)] font-semibold leading-[0.91] text-ink display-tight md:mt-8"
             >
-              Cloud
+              Systems,
               <br />
-              infrastructure.
+              from the
+              <br />
+              ground up.
             </h1>
           </Reveal>
 
           <Reveal delay={200}>
-            <p className="mt-6 max-w-measure text-lg leading-[1.6] text-ink md:mt-7 md:text-xl md:leading-[1.55]">
+            <p className="mt-7 max-w-[34rem] text-xl font-medium leading-[1.45] text-ink md:text-2xl">
               {profile.positioning}
             </p>
-            <p className="mt-4 max-w-measure text-[0.975rem] leading-[1.7] text-muted">
+            <p className="mt-4 max-w-[35rem] text-[0.975rem] leading-[1.7] text-muted">
               {profile.elaboration}
             </p>
           </Reveal>
 
           <Reveal delay={260}>
-            <div className="mt-7 flex flex-wrap items-center gap-x-8 gap-y-4 md:mt-8">
+            <div className="mt-8 flex flex-wrap items-center gap-x-7 gap-y-4">
               <a
-                href="/#work"
-                className="group inline-flex items-center gap-2.5 border border-line-strong px-5 py-3 text-sm text-ink transition-colors duration-200 hover:border-accent hover:text-accent"
+                href="/lab"
+                className="group inline-flex items-center gap-2.5 rounded-full bg-accent px-5 py-3 text-sm font-medium text-white transition-colors duration-200 hover:bg-ink"
               >
-                Selected work
+                Enter Flow Lab
                 <svg viewBox="0 0 16 16" className="h-3.5 w-3.5 transition-transform duration-300 ease-editorial group-hover:translate-x-1" fill="none" stroke="currentColor" strokeWidth="1.5">
                   <path d="M3 8h10M9 4l4 4-4 4" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               </a>
 
               <a
-                href="/#contact"
+                href="/#work"
                 className="link-draw text-sm text-muted transition-colors duration-200 hover:text-ink"
               >
-                Get in touch
+                See selected work
               </a>
             </div>
           </Reveal>
 
         </div>
 
-        {/* ---- Right: the technical visual ---- */}
-        <Reveal delay={380} className="lg:pl-4">
+        <Reveal delay={280} className="lg:pl-2">
           <div
             ref={visualRef}
-            className="relative"
+            className="map-frame relative overflow-hidden border border-line-strong p-5 md:p-8 lg:min-h-[580px]"
             onMouseEnter={() => setHovered(true)}
             onMouseLeave={() => setHovered(false)}
             onFocusCapture={() => setFocused(true)}
             onBlurCapture={onBlur}
           >
-            <Topology frame={frame} paused={paused} reducedMotion={reducedMotion} className="h-auto w-full max-w-[460px] lg:max-w-none" />
-
-          <dl className="mt-8 border-t border-line pt-5">
-            <div className="flex items-center justify-between gap-3">
-              <dt className="meta text-dim">Current focus</dt>
-              <dd className="meta border border-line-strong px-2 py-1 text-dim">Simulated</dd>
+            <div aria-hidden="true" className="absolute left-[14%] top-[-14%] h-[52%] w-[62%] rounded-[50%] border border-accent/25" />
+            <div aria-hidden="true" className="absolute bottom-[-25%] right-[-12%] h-[64%] w-[80%] rounded-[50%] border border-signal/40" />
+            <div className="relative flex items-center justify-between gap-4 border-b border-line pb-4">
+              <p className="font-mono text-xs text-accent">TOBSTAR / SYSTEM MAP</p>
+              <span className="inline-flex items-center gap-2 text-xs text-muted"><span className="waypoint h-2 w-2 rounded-full" />live sketch</span>
             </div>
-            <dd className="mt-2.5 text-[0.975rem] leading-relaxed text-ink">{frame.focusTitle}</dd>
-            <dd className="mt-1.5 font-mono text-xs leading-relaxed text-muted">{frame.focusText}</dd>
+            <Topology frame={frame} paused={paused} reducedMotion={reducedMotion} className="relative mt-6 h-auto w-full max-w-[460px] lg:max-w-none" />
+
+          <dl className="relative mt-5 border-t border-line pt-5">
+            <div className="flex items-center justify-between gap-3">
+              <dt className="text-sm font-medium text-muted">On this route</dt>
+              <dd className="rounded-full border border-line-strong px-3 py-1 text-xs text-muted">Simulated</dd>
+            </div>
+            <dd className="mt-2.5 text-lg font-medium leading-relaxed text-ink">{frame.focusTitle}</dd>
+            <dd className="mt-1.5 text-sm leading-relaxed text-muted">{frame.focusText}</dd>
             <dd className="mt-5 flex items-center justify-between gap-4">
               <a
                 href="#flow-lab"
                 onClick={onExplore}
-                className="link-draw inline-flex min-h-11 items-center text-sm text-accent"
+                className="link-draw inline-flex min-h-11 items-center text-sm font-medium text-accent"
               >
                 Explore the architecture
                 <svg viewBox="0 0 16 16" className="h-3.5 w-3.5 transition-transform duration-300 ease-editorial group-hover:translate-x-1" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">

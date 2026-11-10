@@ -1,190 +1,57 @@
 import { additionalWork, projects, type Project } from "@/data/portfolio";
-import { FlowDiagram } from "./FlowDiagram";
 import { Reveal } from "./Reveal";
-import { Section } from "./Section";
 
-const Arrow = ({ className = "" }: { className?: string }) => (
-  <svg viewBox="0 0 16 16" className={className} fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
-    <path d="M3 8h10M9 4l4 4-4 4" strokeLinecap="round" strokeLinejoin="round" />
-  </svg>
-);
+const Art = ({ project, large = false }: { project: Project; large?: boolean }) => {
+  const variant = Number(project.index) % 4;
+  return (
+    <div aria-hidden="true" className={`relative min-h-[170px] overflow-hidden border border-ink/15 ${large ? "md:min-h-[360px]" : ""}`}>
+      <div className={`absolute inset-0 ${variant === 0 ? "bg-[rgb(var(--raised)/.75)]" : variant === 1 ? "bg-accent/15" : variant === 2 ? "bg-signal/20" : "bg-ink/10"}`} />
+      {variant === 1 && <><span className="absolute left-[15%] top-[25%] h-9 w-9 rounded-full border-2 border-accent bg-base" /><span className="absolute left-[35%] top-[42%] h-px w-[42%] bg-accent" /><span className="absolute right-[13%] top-[30%] h-16 w-16 border-2 border-accent bg-base" /><span className="absolute bottom-[14%] left-[17%] font-mono text-[0.65rem] text-accent">REQUEST → DELIVERY</span></>}
+      {variant === 2 && <><span className="absolute inset-x-0 top-1/2 h-px bg-ink/25" /><span className="absolute left-[16%] top-[17%] h-[66%] w-[23%] border border-ink/35" /><span className="absolute left-[47%] top-[28%] h-[43%] w-[37%] border border-ink/45 bg-base/35" /><span className="absolute left-[23%] top-[38%] h-3 w-3 rounded-full bg-accent" /><span className="absolute right-[21%] top-[45%] h-3 w-3 rounded-full bg-signal" /></>}
+      {variant === 3 && <><span className="absolute left-[12%] top-[18%] h-20 w-20 rotate-45 border-2 border-ink/45" /><span className="absolute right-[18%] top-[23%] h-10 w-10 rounded-full border-2 border-accent" /><span className="absolute bottom-[19%] left-[36%] h-px w-[48%] rotate-[-23deg] bg-accent" /><span className="absolute bottom-[12%] right-[13%] font-mono text-[0.65rem] text-ink/60">ISOLATED LAB</span></>}
+      {variant === 0 && <><span className="absolute inset-5 border border-ink/25" /><span className="absolute left-[25%] top-[27%] h-[46%] w-px bg-ink/30" /><span className="absolute left-[49%] top-[27%] h-[46%] w-px bg-ink/30" /><span className="absolute left-[73%] top-[27%] h-[46%] w-px bg-ink/30" /><span className="absolute left-[17%] top-[48%] h-px w-[66%] bg-ink/30" /><span className="absolute bottom-[13%] left-[12%] font-mono text-[0.65rem] text-ink/60">OFFLINE / 43 PATHS</span></>}
+      <span className="absolute right-4 top-4 font-mono text-[0.65rem] text-ink/55">{project.year}</span>
+    </div>
+  );
+};
 
-/** 01 — full-width, with architecture diagram. The anchor of the section. */
-const Flagship = ({ project }: { project: Project }) => (
-  <Reveal as="article" className="group">
-    <a href={`/projects/${project.slug}`} className="block focus-visible:outline-none">
-      <div className="border-t border-line-strong pt-8 transition-colors duration-300 group-hover:border-accent md:pt-10">
-        <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-3">
-          <p className="meta flex items-center gap-3 text-dim">
-            <span className="text-accent">{project.index}</span>
-            <span aria-hidden="true" className="text-line-strong">/</span>
-            <span>{project.category}</span>
-          </p>
-          <p className="meta text-dim">{project.year}</p>
-        </div>
-
-        <h3 className="mt-7 text-display-sm font-medium text-ink display-tight">
-          {project.title}
-        </h3>
-        <p className="mt-3 text-lg text-muted">{project.subtitle}</p>
-
-        <div className="mt-10 grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:gap-14">
-          <div>
-            <p className="max-w-measure text-[0.975rem] leading-[1.75] text-muted">
-              {project.summary}
-            </p>
-
-            <ul className="mt-8 space-y-3">
-              {project.highlights.map((h) => (
-                <li key={h} className="flex gap-3.5 text-sm leading-relaxed text-ink">
-                  <span aria-hidden="true" className="mt-[0.5rem] h-px w-4 shrink-0 bg-accent/60" />
-                  {h}
-                </li>
-              ))}
-            </ul>
-
-            <p className="mt-9 flex flex-wrap gap-x-4 gap-y-2">
-              {project.stack.map((t) => (
-                <span key={t} className="font-mono text-xs text-dim">
-                  {t}
-                </span>
-              ))}
-            </p>
-
-            <span className="link-draw mt-9 inline-flex text-sm text-accent">
-              Read the case study
-              <Arrow className="h-3.5 w-3.5 transition-transform duration-300 ease-editorial group-hover:translate-x-1" />
-            </span>
-          </div>
-
-          {project.caseStudy?.diagram && (
-            <div className="lg:pt-1">
-              <FlowDiagram {...project.caseStudy.diagram} />
-            </div>
-          )}
-        </div>
+const ProjectTile = ({ project, large = false, delay = 0 }: { project: Project; large?: boolean; delay?: number }) => (
+  <Reveal as="article" delay={delay} className={large ? "md:col-span-2" : ""}>
+    <a href={`/projects/${project.slug}`} className="group block focus-visible:outline-none">
+      <Art project={project} large={large} />
+      <div className={`relative ${large ? "-mt-20 ml-5 mr-5 bg-base p-5 md:-mt-28 md:ml-10 md:mr-10 md:p-8" : "pt-5"}`}>
+        <div className="flex flex-wrap items-center justify-between gap-3 text-xs text-muted"><span>{project.category}</span><span className="font-mono text-accent">{project.index}</span></div>
+        {project.hackathon && <span className="mt-3 inline-flex rounded-full border border-accent/40 px-2.5 py-1 text-xs font-medium text-accent">Built for {project.hackathon}</span>}
+        <h3 className={`${large ? "mt-4 text-[clamp(2rem,4vw,4rem)] leading-[.98]" : "mt-3 text-2xl leading-[1.05]"} font-semibold text-ink display-tight transition-colors group-hover:text-accent`}>{project.title}</h3>
+        <p className="mt-3 max-w-[58ch] text-sm leading-relaxed text-muted">{project.subtitle}</p>
+        {large && <p className="mt-5 max-w-measure text-[0.95rem] leading-[1.7] text-muted">{project.summary}</p>}
+        <span className="mt-5 inline-block text-sm font-medium text-accent">Open project ↗</span>
       </div>
     </a>
   </Reveal>
 );
 
-/** 02+ — editorial rows. Metadata left, content right. */
-const ProjectRow = ({ project, delay }: { project: Project; delay: number }) => {
-  const hasPage = Boolean(project.caseStudy);
-
-  const body = (
-    <div className="grid gap-6 md:grid-cols-[140px_1fr] md:gap-10">
-      <div className="md:pt-1">
-        <p className="meta text-dim">
-          <span className="text-accent/80">{project.index}</span>
-        </p>
-        <p className="meta mt-2.5 leading-relaxed text-dim">{project.category}</p>
-      </div>
-
-      <div>
-        <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2">
-          <h3 className="text-2xl font-medium text-ink transition-colors duration-200 group-hover:text-accent md:text-[1.75rem]">
-            {project.title}
-          </h3>
-          <p className="meta text-dim">{project.year}</p>
-        </div>
-
-        <p className="mt-2 text-[0.95rem] text-muted">{project.subtitle}</p>
-
-        <p className="mt-5 max-w-measure text-[0.925rem] leading-[1.75] text-muted">
-          {project.summary}
-        </p>
-
-        <p className="mt-6 flex flex-wrap gap-x-4 gap-y-2">
-          {project.stack.map((t) => (
-            <span key={t} className="font-mono text-xs text-dim">
-              {t}
-            </span>
-          ))}
-        </p>
-
-        {hasPage && (
-          <span className="link-draw mt-7 inline-flex text-sm text-muted transition-colors duration-200 group-hover:text-accent">
-            View project
-            <Arrow className="h-3.5 w-3.5 transition-transform duration-300 ease-editorial group-hover:translate-x-1" />
-          </span>
-        )}
-      </div>
-    </div>
-  );
-
-  const shell = "block border-t border-line pt-8 transition-colors duration-300 md:pt-9";
-
-  return (
-    <Reveal as="article" delay={delay} className="group">
-      {hasPage ? (
-        <a href={`/projects/${project.slug}`} className={`${shell} group-hover:border-line-strong`}>
-          {body}
-        </a>
-      ) : (
-        <div className={shell}>{body}</div>
-      )}
-    </Reveal>
-  );
-};
-
 export const SelectedWork = () => {
-  const flagship = projects.find((p) => p.tier === "flagship");
-  const featured = projects.filter((p) => p.tier === "featured");
-
+  const flagship = projects.find((project) => project.tier === "flagship");
+  const remainder = projects.filter((project) => project.tier !== "flagship");
   return (
-    <Section
-      id="work"
-      index="01"
-      label="Selected work"
-      title="Things I built, and how they run."
-      intro="Six projects, ordered deliberately. The first one is the one I'd want to talk about — it's where the infrastructure thinking is."
-    >
-      <div className="space-y-20 md:space-y-28">
-        {flagship && <Flagship project={flagship} />}
-
-        <div className="space-y-14 md:space-y-16">
-          {featured.map((project, i) => (
-            <ProjectRow key={project.slug} project={project} delay={i * 60} />
-          ))}
+    <section id="work" className="scroll-mt-24 border-t border-line" aria-labelledby="work-heading">
+      <div className="shell py-20 md:py-28 lg:py-36">
+        <Reveal>
+          <div className="grid gap-6 md:grid-cols-[1fr_1.55fr] md:items-end md:gap-12">
+            <div><p className="text-sm font-medium text-accent">Selected work</p></div>
+            <div><h2 id="work-heading" className="max-w-[13ch] text-[clamp(2.6rem,5vw,5.5rem)] font-semibold leading-[.93] text-ink display-tight">Things I built and how they behave.</h2><p className="mt-5 max-w-[52ch] text-[0.975rem] leading-[1.7] text-muted">A small archive of systems, experiments and tools. Each piece starts from a different problem, so each gets a different shape.</p></div>
+          </div>
+        </Reveal>
+        <div className="mt-14 grid gap-x-7 gap-y-14 md:grid-cols-2 md:gap-y-20">
+          {flagship && <ProjectTile project={flagship} large />}
+          {remainder.map((project, index) => <ProjectTile key={project.slug} project={project} delay={index * 55} />)}
         </div>
-
-        {/* Additional work — compact, deliberately de-emphasised. */}
-        <Reveal className="border-t border-line pt-9">
-          <h3 className="meta text-dim">Additional work</h3>
-          <ul className="mt-8 grid gap-8 md:grid-cols-2 md:gap-10">
-            {additionalWork.map((item) => (
-              <li key={item.title}>
-                <p className="meta text-dim">{item.context}</p>
-                <h4 className="mt-3 text-[0.975rem] font-medium leading-snug text-ink">
-                  {item.github ? (
-                    <a
-                      href={item.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="link-draw inline transition-colors hover:text-accent"
-                    >
-                      {item.title}
-                    </a>
-                  ) : (
-                    item.title
-                  )}
-                </h4>
-                <p className="mt-2.5 max-w-measure text-sm leading-relaxed text-muted">
-                  {item.note}
-                </p>
-                <p className="mt-3 flex flex-wrap gap-x-3 gap-y-1">
-                  {item.stack.map((t) => (
-                    <span key={t} className="font-mono text-xs text-dim">
-                      {t}
-                    </span>
-                  ))}
-                </p>
-              </li>
-            ))}
-          </ul>
+        <Reveal className="mt-20 border-t border-line pt-8">
+          <p className="text-sm font-medium text-muted">Final year project</p>
+          <div className="mt-5 grid gap-7 md:grid-cols-2">{additionalWork.map((item) => <div key={item.title}><h3 className="text-lg font-medium text-ink">{item.title}</h3><p className="mt-2 text-sm leading-relaxed text-muted">{item.note}</p><div className="mt-3 flex gap-4 text-sm"><a className="text-accent underline-offset-4 hover:underline" href={item.paper} target="_blank" rel="noreferrer">Read the paper ↗</a><a className="text-accent underline-offset-4 hover:underline" href={item.github} target="_blank" rel="noreferrer">View source ↗</a></div></div>)}</div>
         </Reveal>
       </div>
-    </Section>
+    </section>
   );
 };
