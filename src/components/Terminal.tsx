@@ -1,159 +1,122 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import { profile } from "@/data/portfolio";
+import { orderedProjects, routes } from "@/lib/site";
 
-interface Line {
-  kind: "input" | "output" | "accent";
-  text: string;
-}
+type Line = { id: number; node: ReactNode; dim?: boolean };
 
-const BANNER: Line[] = [
-  { kind: "output", text: `${profile.brand} — type 'help' for commands, 'exit' to close.` },
-];
+const ext = (href: string, text = href) => (
+  <a href={href} target="_blank" rel="noopener noreferrer">
+    {text}
+  </a>
+);
 
-const COMMANDS: Record<string, string[]> = {
-  whoami: ["oluwatobiloba"],
-  focus: ["cloud / infrastructure / security"],
-  status: ["open_to_work — junior engineering roles"],
-  stack: [
-    "cloud      aws · docker · nginx",
-    "network    huawei · cisco · pfsense",
-    "security   kali · metasploit · wireshark",
-    "code       python · typescript · sql",
-  ],
-  location: ["lagos, nigeria"],
-  contact: [`email      ${profile.email}`, "github     github.com/XayZay", "linkedin   in/oluwatobilobaoyeyemi"],
-  help: [
-    "whoami     who is this",
-    "focus      current direction",
-    "status     availability",
-    "stack      what i work with",
-    "location   where i am",
-    "contact    how to reach me",
-    "clear      clear the screen",
-    "exit       close terminal",
-  ],
-};
+const HELP = `commands
+  whoami         who this is
+  ls             list projects
+  open <n|name>  open a project (e.g. open 1, open ghost-pay)
+  work · lab · notes · about · hackathons · home
+  cv             résumé
+  contact        email, github, linkedin
+  clear · exit`;
 
-/**
- * Optional easter egg. Opens on backtick, or from the footer button.
- * Nothing on the site depends on it.
- */
-export const Terminal = ({ open, onClose }: { open: boolean; onClose: () => void }) => {
-  const [lines, setLines] = useState<Line[]>(BANNER);
+/** A small optional terminal. Opens from the footer or with the ` key. */
+export const Terminal = ({ open, onClose, onNavigate }: { open: boolean; onClose: () => void; onNavigate: (path: string) => void }) => {
+  const [lines, setLines] = useState<Line[]>([{ id: 0, node: HELP }]);
   const [value, setValue] = useState("");
-  const inputRef = useRef<HTMLInputElement>(null);
-  const scrollRef = useRef<HTMLDivElement>(null);
+  const input = useRef<HTMLInputElement>(null);
+  const out = useRef<HTMLDivElement>(null);
+  const nextId = useRef(1);
 
   useEffect(() => {
-    if (open) inputRef.current?.focus();
+    if (open) input.current?.focus();
   }, [open]);
 
   useEffect(() => {
-    if (scrollRef.current) scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
+    out.current?.scrollTo({ top: out.current.scrollHeight });
   }, [lines]);
 
-  useEffect(() => {
-    if (!open) return;
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
-    };
-    document.addEventListener("keydown", onKey);
-    return () => document.removeEventListener("keydown", onKey);
-  }, [open, onClose]);
+  const print = (...nodes: ReactNode[]) => setLines((prev) => [...prev, ...nodes.map((node) => ({ id: nextId.current++, node }))]);
+
+  const go = (path: string, label: string) => {
+    onNavigate(path);
+    print(`→ ${label}`);
+  };
 
   const run = (raw: string) => {
-    const cmd = raw.trim().toLowerCase();
+    const [cmd = "", ...rest] = raw.trim().split(/\s+/);
+    const arg = rest.join(" ");
     if (!cmd) return;
-
-    if (cmd === "clear") {
-      setLines(BANNER);
-      return;
+    setLines((prev) => [...prev, { id: nextId.current++, node: `$ ${raw.trim()}`, dim: true }]);
+    switch (cmd.toLowerCase()) {
+      case "help":
+        return print(HELP);
+      case "whoami":
+        return print(`${profile.name} (${profile.short})\n${profile.positioning}\n${profile.location}`);
+      case "ls":
+      case "projects":
+        return print(orderedProjects.map((p) => `${p.n}  ${p.slug.padEnd(20)} ${p.title}`).join("\n"));
+      case "open": {
+        const p = orderedProjects.find((x) => x.slug === arg || x.n === arg.padStart(2, "0"));
+        return p ? go(routes.project(p.slug), p.title) : print(`no project "${arg}". Try ls`);
+      }
+      case "cv":
+        return print(ext(profile.resumeUrl, "Oyeyemi_Oluwatobiloba_CV.pdf"));
+      case "contact":
+      case "email":
+        return print(
+          <>
+            {`email     ${profile.email}\ngithub    `}
+            {ext(profile.github)}
+            {"\nlinkedin  "}
+            {ext(profile.linkedin)}
+          </>,
+        );
+      case "clear":
+        return setLines([]);
+      case "exit":
+        return onClose();
+      case "home":
+        return go("/", "home");
+      case "work":
+      case "lab":
+      case "notes":
+      case "about":
+      case "hackathons":
+        return go(`/${cmd.toLowerCase()}`, cmd.toLowerCase());
+      default:
+        return print(`command not found: ${cmd}. Try help`);
     }
-
-    if (cmd === "exit" || cmd === "quit") {
-      onClose();
-      setLines(BANNER);
-      return;
-    }
-
-    const output = COMMANDS[cmd];
-    setLines((prev) => [
-      ...prev,
-      { kind: "input", text: cmd },
-      ...(output
-        ? output.map((text) => ({ kind: "output" as const, text }))
-        : [{ kind: "accent" as const, text: `command not found: ${cmd} — try 'help'` }]),
-    ]);
   };
 
   if (!open) return null;
-
   return (
-    <div
-      className="fixed inset-0 z-[60] flex items-end justify-center bg-base/70 p-4 backdrop-blur-sm md:items-center"
-      role="dialog"
-      aria-modal="true"
-      aria-label="Terminal"
-      onMouseDown={(e) => {
-        if (e.target === e.currentTarget) onClose();
-      }}
-    >
-      <div className="w-full max-w-xl border border-line-strong bg-base shadow-2xl">
-        <div className="flex items-center justify-between border-b border-line px-4 py-2.5">
-          <span className="meta text-dim">tobstar — sh</span>
-          <button
-            type="button"
-            onClick={onClose}
-            className="meta text-dim transition-colors hover:text-accent"
-            aria-label="Close terminal"
-          >
-            esc
-          </button>
-        </div>
-
-        <div ref={scrollRef} className="max-h-[50vh] overflow-y-auto px-4 py-4">
-          {lines.map((line, i) => (
-            <p
-              key={i}
-              className={`whitespace-pre-wrap font-mono text-[0.8125rem] leading-relaxed ${
-                line.kind === "input"
-                  ? "text-ink"
-                  : line.kind === "accent"
-                    ? "text-accent"
-                    : "text-muted"
-              }`}
-            >
-              {line.kind === "input" && <span className="text-accent">$ </span>}
-              {line.text}
-            </p>
-          ))}
-
-          <form
-            onSubmit={(e) => {
-              e.preventDefault();
-              run(value);
-              setValue("");
-            }}
-            className="mt-1 flex items-center gap-2"
-          >
-            <span aria-hidden="true" className="font-mono text-[0.8125rem] text-accent">
-              $
-            </span>
-            <label htmlFor="terminal-input" className="sr-only">
-              Terminal command
-            </label>
-            <input
-              id="terminal-input"
-              ref={inputRef}
-              value={value}
-              onChange={(e) => setValue(e.target.value)}
-              autoComplete="off"
-              spellCheck={false}
-              className="w-full bg-transparent font-mono text-[0.8125rem] text-ink caret-accent outline-none"
-            />
-          </form>
-        </div>
+    <div className="term" role="dialog" aria-label="Terminal">
+      <header>
+        <span>tobi@portfolio ~</span>
+        <button type="button" onClick={onClose} aria-label="Close terminal">
+          close
+        </button>
+      </header>
+      <div className="out" ref={out} aria-live="polite">
+        {lines.map((l) => (
+          <div key={l.id} className={l.dim ? "dim" : undefined}>
+            {l.node}
+          </div>
+        ))}
       </div>
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          run(value);
+          setValue("");
+        }}
+      >
+        <span aria-hidden="true">$</span>
+        <label className="sr-only" htmlFor="term-input">
+          Command
+        </label>
+        <input id="term-input" ref={input} value={value} onChange={(e) => setValue(e.target.value)} autoComplete="off" spellCheck={false} placeholder="type help" />
+      </form>
     </div>
   );
 };

@@ -59,7 +59,8 @@ export const profile = {
   github: "https://github.com/XayZay",
   linkedin: "https://www.linkedin.com/in/oluwatobilobaoyeyemi",
   resumeUrl: "/documents/Oyeyemi_Oluwatobiloba_CV.pdf",
-  availability: "Open to junior engineering roles",
+  /** Path to a photo in /public (e.g. "/tobi.jpg"). The photo frame is hidden until this is set. */
+  photo: null as string | null,
   /** Hero supporting copy. Specific, not aspirational filler. */
   positioning:
     "Engineer focused on cloud engineering and architecture.",
@@ -68,11 +69,10 @@ export const profile = {
 } as const;
 
 export const navItems = [
-  { label: "Work", href: "/work" },
-  { label: "Hackathons", href: "/hackathons" },
-  { label: "Flow Lab", href: "/lab" },
-  { label: "Field Notes", href: "/field-notes" },
-  { label: "About", href: "/about" },
+  { id: "work", label: "Work", href: "/work" },
+  { id: "lab", label: "Lab", href: "/lab" },
+  { id: "notes", label: "Notes", href: "/notes" },
+  { id: "about", label: "About", href: "/about" },
 ] as const;
 
 /** Hero status strip. Factual, present-tense. */
@@ -817,7 +817,7 @@ export const about = {
 
 export const contact = {
   heading: "Open to the next problem.",
-  body: "If you're building infrastructure, backend systems or security tooling, I'd like to hear about it. I'm looking for junior engineering roles where I can work on systems that actually run.",
+  body: "If you're building infrastructure, backend systems or security tooling, I'd like to hear about it. I'm looking for engineering roles where I can work on systems that actually run.",
   links: [
     { label: "Email", value: profile.email, href: `mailto:${profile.email}` },
     { label: "GitHub", value: "github.com/XayZay", href: profile.github },

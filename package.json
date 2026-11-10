@@ -8,7 +8,7 @@
     "build": "vite build",
     "build:dev": "vite build --mode development",
     "lint": "eslint .",
-    "check:flow-engine": "node scripts/check-flow-engine.mjs",
+    "check:flow-data": "node scripts/check-flow-data.mjs",
     "preview": "vite preview"
   },
   "dependencies": {
