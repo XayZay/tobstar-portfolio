@@ -108,6 +108,17 @@
     background: rgb(var(--base));
   }
 
+  select option {
+    color: rgb(var(--ink));
+    background-color: rgb(var(--base));
+  }
+
+  select option:checked,
+  select option:hover {
+    color: rgb(var(--ink));
+    background-color: rgb(var(--raised));
+  }
+
   /* Visible, consistent keyboard focus everywhere. */
   :focus-visible {
     outline: 2px solid rgb(var(--accent));
