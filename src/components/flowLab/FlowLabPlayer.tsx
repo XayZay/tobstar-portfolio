@@ -35,6 +35,141 @@ const logLine = (step: Flow["steps"][number]) => {
   return parts.join(" · ");
 };
 
+const FlowPicker = ({
+  flows,
+  value,
+  onChange,
+}: {
+  flows: Flow[];
+  value: string;
+  onChange: (id: string) => void;
+}) => {
+  const [open, setOpen] = useState(false);
+  const selectedIndex = Math.max(0, flows.findIndex((item) => item.id === value));
+  const [activeIndex, setActiveIndex] = useState(selectedIndex);
+  const rootRef = useRef<HTMLDivElement>(null);
+  const triggerRef = useRef<HTMLButtonElement>(null);
+  const optionRefs = useRef<Array<HTMLDivElement | null>>([]);
+
+  useEffect(() => {
+    if (!open) return;
+    optionRefs.current[activeIndex]?.focus();
+  }, [open, activeIndex]);
+
+  useEffect(() => {
+    if (!open) return;
+    const closeOnOutsidePointer = (event: PointerEvent) => {
+      if (!rootRef.current?.contains(event.target as Node)) setOpen(false);
+    };
+    document.addEventListener("pointerdown", closeOnOutsidePointer);
+    return () => document.removeEventListener("pointerdown", closeOnOutsidePointer);
+  }, [open]);
+
+  const moveActive = (index: number) => {
+    const nextIndex = (index + flows.length) % flows.length;
+    setActiveIndex(nextIndex);
+    optionRefs.current[nextIndex]?.focus();
+  };
+
+  const choose = (id: string) => {
+    onChange(id);
+    setOpen(false);
+    triggerRef.current?.focus();
+  };
+
+  const handleTriggerKeyDown = (event: KeyboardEvent<HTMLButtonElement>) => {
+    if (event.key === "ArrowDown" || event.key === "ArrowUp") {
+      event.preventDefault();
+      const direction = event.key === "ArrowDown" ? 1 : -1;
+      if (!open) {
+        setActiveIndex((selectedIndex + direction + flows.length) % flows.length);
+        setOpen(true);
+      } else {
+        moveActive(activeIndex + direction);
+      }
+    } else if (event.key === "Home" || event.key === "End") {
+      event.preventDefault();
+      const nextIndex = event.key === "Home" ? 0 : flows.length - 1;
+      setActiveIndex(nextIndex);
+      setOpen(true);
+    } else if (event.key === "Escape" && open) {
+      event.preventDefault();
+      setOpen(false);
+    }
+  };
+
+  const handleOptionKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
+    if (event.key === "ArrowDown" || event.key === "ArrowUp") {
+      event.preventDefault();
+      moveActive(activeIndex + (event.key === "ArrowDown" ? 1 : -1));
+    } else if (event.key === "Home" || event.key === "End") {
+      event.preventDefault();
+      moveActive(event.key === "Home" ? 0 : flows.length - 1);
+    } else if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      choose(flows[activeIndex].id);
+    } else if (event.key === "Escape") {
+      event.preventDefault();
+      setOpen(false);
+      triggerRef.current?.focus();
+    } else if (event.key === "Tab") {
+      setOpen(false);
+    }
+  };
+
+  return (
+    <div ref={rootRef} className="relative mt-3">
+      <button
+        ref={triggerRef}
+        id="flow-select"
+        type="button"
+        aria-labelledby="flow-select-label flow-select-value"
+        aria-haspopup="listbox"
+        aria-expanded={open}
+        aria-controls="flow-select-options"
+        onClick={() => {
+          if (open) setOpen(false);
+          else {
+            setActiveIndex(selectedIndex);
+            setOpen(true);
+          }
+        }}
+        onKeyDown={handleTriggerKeyDown}
+        className="flex min-h-11 w-full items-center justify-between gap-3 border border-line-strong bg-base px-3 text-left text-sm text-ink focus-visible:outline-ink"
+      >
+        <span id="flow-select-value">{flows[selectedIndex]?.title}</span>
+        <svg aria-hidden="true" viewBox="0 0 16 16" className={`h-4 w-4 shrink-0 transition-transform ${open ? "rotate-180" : ""}`} fill="none" stroke="currentColor" strokeWidth="1.5">
+          <path d="m3.5 6 4.5 4 4.5-4" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+      </button>
+      {open && (
+        <div
+          id="flow-select-options"
+          role="listbox"
+          aria-labelledby="flow-select-label"
+          className="absolute z-30 mt-1 max-h-64 w-full overflow-y-auto border border-line-strong bg-base p-1 shadow-lg"
+          onKeyDown={handleOptionKeyDown}
+        >
+          {flows.map((item, index) => (
+            <div
+              key={item.id}
+              ref={(node) => { optionRefs.current[index] = node; }}
+              role="option"
+              aria-selected={item.id === value}
+              tabIndex={index === activeIndex ? 0 : -1}
+              onFocus={() => setActiveIndex(index)}
+              onClick={() => choose(item.id)}
+              className={`flex min-h-11 cursor-pointer items-center px-3 py-2 text-sm leading-relaxed transition-colors ${index === activeIndex ? "bg-raised text-ink" : "text-muted hover:bg-raised hover:text-ink"}`}
+            >
+              {item.title}
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+};
+
 const NodeExplainer = ({ node, onClose }: { node: SimNode; onClose: () => void }) => {
   const dialogRef = useRef<HTMLElement>(null);
   const closeRef = useRef<HTMLButtonElement>(null);
@@ -286,7 +421,7 @@ const FlowLabPlayer = ({ requestedScenarioId, onScenarioOpened }: FlowLabPlayerP
   };
 
   const onKeyboard = (event: KeyboardEvent<HTMLDivElement>) => {
-    if (event.target instanceof HTMLElement && event.target.closest("select, input, textarea, [contenteditable=true]")) return;
+    if (event.target instanceof HTMLElement && event.target.closest("select, input, textarea, [contenteditable=true], [role=listbox]")) return;
     if (event.key === " ") {
       if (event.target instanceof HTMLElement && event.target.closest("button")) return;
       event.preventDefault();
@@ -325,15 +460,8 @@ const FlowLabPlayer = ({ requestedScenarioId, onScenarioOpened }: FlowLabPlayerP
               ))}
             </div>
 
-            <label className="meta mt-7 block text-dim" htmlFor="flow-select">Flow</label>
-            <select
-              id="flow-select"
-              value={flow.id}
-              onChange={(event) => changeFlow(event.target.value)}
-              className="mt-3 min-h-11 w-full border border-line-strong bg-base px-3 text-sm text-ink focus-visible:outline-ink"
-            >
-              {scenario.flows.map((item) => <option className="bg-base text-ink" key={item.id} value={item.id}>{item.title}</option>)}
-            </select>
+            <p id="flow-select-label" className="meta mt-7 block text-dim">Flow</p>
+            <FlowPicker flows={scenario.flows} value={flow.id} onChange={changeFlow} />
 
             <div className="mt-7 flex flex-wrap gap-2">
               <span className="meta max-w-full whitespace-normal break-words border border-line-strong px-2.5 py-2 leading-relaxed text-muted">Built in: {scenario.provenance.lab}</span>
