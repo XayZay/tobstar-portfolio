@@ -4,8 +4,49 @@ import { navItems, profile } from "@/data/portfolio";
 export const Navigation = ({ onOpenTerminal }: { onOpenTerminal?: () => void }) => {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [theme, setTheme] = useState<"light" | "dark">(() =>
+    document.documentElement.dataset.theme === "dark" ? "dark" : "light",
+  );
   const panelRef = useRef<HTMLDivElement>(null);
   const toggleRef = useRef<HTMLButtonElement>(null);
+
+  const toggleTheme = () => {
+    const nextTheme = theme === "light" ? "dark" : "light";
+    setTheme(nextTheme);
+    document.documentElement.dataset.theme = nextTheme;
+    document.documentElement.style.colorScheme = nextTheme;
+    document.querySelector('meta[name="theme-color"]')?.setAttribute(
+      "content",
+      nextTheme === "dark" ? "#181c19" : "#eeebdf",
+    );
+    try {
+      localStorage.setItem("tobstar-theme", nextTheme);
+    } catch {
+      // The selected theme still applies for this page if storage is unavailable.
+    }
+  };
+
+  const themeButton = (mobile = false) => (
+    <button
+      type="button"
+      onClick={toggleTheme}
+      className={`inline-flex items-center justify-center gap-2 rounded-full border border-line-strong text-ink transition-colors hover:border-accent hover:text-accent ${mobile ? "px-3 py-2" : "h-10 w-10"}`}
+      aria-label={`Switch to ${theme === "light" ? "dark" : "light"} mode`}
+      title={`Switch to ${theme === "light" ? "dark" : "light"} mode`}
+    >
+      {theme === "light" ? (
+        <svg aria-hidden="true" viewBox="0 0 20 20" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="1.5">
+          <path d="M16.5 12.5A6.5 6.5 0 0 1 7.5 3.5a6.5 6.5 0 1 0 9 9Z" strokeLinejoin="round" />
+        </svg>
+      ) : (
+        <svg aria-hidden="true" viewBox="0 0 20 20" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round">
+          <circle cx="10" cy="10" r="3.2" />
+          <path d="M10 1.8v2M10 16.2v2M18.2 10h-2M3.8 10h-2m14-5.8-1.4 1.4M5.6 14.4l-1.4 1.4m11.6 0-1.4-1.4M5.6 5.6 4.2 4.2" />
+        </svg>
+      )}
+      {mobile && <span className="meta">{theme === "light" ? "Dark mode" : "Light mode"}</span>}
+    </button>
+  );
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -90,6 +131,7 @@ export const Navigation = ({ onOpenTerminal }: { onOpenTerminal?: () => void }) 
           >
             Résumé
           </a>
+          {themeButton()}
         </div>
 
         <button
@@ -134,6 +176,7 @@ export const Navigation = ({ onOpenTerminal }: { onOpenTerminal?: () => void }) 
             </li>
           ))}
           <li className="pb-4 pt-4">
+            <div className="mb-4">{themeButton(true)}</div>
             <a
               href={profile.resumeUrl}
               target="_blank"

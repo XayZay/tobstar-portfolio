@@ -20,6 +20,23 @@
     --gutter: 1.25rem;
   }
 
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --base: 24 28 25;
+    --raised: 36 43 37;
+    --line: 62 73 61;
+    --line-strong: 112 128 105;
+    --ink: 232 230 213;
+    --muted: 190 197 177;
+    --dim: 157 169 147;
+    --accent: 210 151 177;
+    --signal: 224 174 91;
+  }
+
+  :root[data-theme="light"] {
+    color-scheme: light;
+  }
+
   @media (min-width: 768px) {
     :root {
       --gutter: 2.5rem;
@@ -54,11 +71,41 @@
     overflow-x: hidden;
     background-image: linear-gradient(rgb(var(--line) / 0.28) 1px, transparent 1px);
     background-size: 100% 36px;
+    transition: background-color 240ms ease, color 240ms ease;
   }
 
   ::selection {
     background-color: rgb(var(--accent) / 0.28);
     color: rgb(var(--ink));
+  }
+
+  /* Keep both document and nested-panel scrollbars in the field-guide palette. */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: rgb(var(--line-strong)) rgb(var(--base));
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: rgb(var(--base));
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: rgb(var(--line-strong));
+    border: 2px solid rgb(var(--base));
+    border-radius: 999px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgb(var(--dim));
+  }
+
+  ::-webkit-scrollbar-corner {
+    background: rgb(var(--base));
   }
 
   /* Visible, consistent keyboard focus everywhere. */

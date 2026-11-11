@@ -8,6 +8,7 @@ interface SectionProps {
   label: string;
   title?: ReactNode;
   intro?: ReactNode;
+  introClassName?: string;
   children: ReactNode;
   className?: string;
 }
@@ -22,6 +23,7 @@ export const Section = ({
   label,
   title,
   intro,
+  introClassName = "",
   children,
   className = "",
 }: SectionProps) => (
@@ -50,7 +52,7 @@ export const Section = ({
 
       {intro ? (
         <Reveal delay={120}>
-          <div className="mt-5 max-w-measure text-[0.975rem] leading-[1.75] text-muted md:text-base">
+          <div className={`mt-5 max-w-measure text-[0.975rem] leading-[1.75] text-muted md:text-base ${introClassName}`}>
             {intro}
           </div>
         </Reveal>

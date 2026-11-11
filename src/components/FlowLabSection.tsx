@@ -36,6 +36,7 @@ export const FlowLabSection = ({ requestedScenarioId, onScenarioOpened }: FlowLa
       label="Flow Lab"
       title="Follow the request."
       intro="Scripted traffic through architectures I built in hands-on cloud labs. The designs are real; the requests are simulated and the timings are illustrative."
+      introClassName="text-ink"
       className="flow-lab-section"
     >
       <div ref={sectionRef} className={`${RESERVED_SPACE} relative`}>
