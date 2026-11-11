@@ -52,7 +52,7 @@ export const Section = ({
 
       {intro ? (
         <Reveal delay={120}>
-          <div className={`mt-5 max-w-measure text-[0.975rem] leading-[1.75] text-muted md:text-base ${introClassName}`}>
+          <div className={`mt-5 max-w-measure text-[0.975rem] leading-[1.75] ${introClassName || "text-muted"} md:text-base`}>
             {intro}
           </div>
         </Reveal>
