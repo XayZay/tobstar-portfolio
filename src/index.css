@@ -191,6 +191,11 @@
     transform: none;
   }
 
+  .reveal.reveal-static {
+    opacity: 1;
+    transform: none;
+  }
+
   /* Animated dash travelling along a diagram edge. */
   .flow-dash {
     stroke-dasharray: 3 7;
