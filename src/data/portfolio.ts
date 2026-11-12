@@ -64,7 +64,7 @@ export const profile = {
   positioning:
     "Engineer focused on cloud engineering and architecture.",
   elaboration:
-    "I started at the physical layer — cabling, switches, firewalls — and worked upward into the systems that run on top of them. Most of what I build has to run somewhere, so I spend my time on how it runs.",
+    "whatever you build has to sit somewhere. i build that. scalable. resilient. secure",
 } as const;
 
 export const navItems = [

@@ -67,13 +67,15 @@ export const Hero = ({ onFrameChange, onExplore }: HeroProps) => {
           <Reveal delay={80}>
             <h1
               id="hero-heading"
-              className="mt-6 max-w-[10ch] text-[clamp(3.25rem,8vw,6.8rem)] font-semibold leading-[0.91] text-ink display-tight md:mt-8"
+              className="mt-6 max-w-[12ch] text-[clamp(3.25rem,8vw,6.8rem)] font-semibold leading-[0.91] text-ink display-tight md:mt-8"
             >
-              Systems,
+              building
+              <br />
+              systems,
               <br />
               from the
               <br />
-              ground up.
+              group up :)
             </h1>
           </Reveal>
 
