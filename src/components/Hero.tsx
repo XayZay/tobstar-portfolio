@@ -137,7 +137,7 @@ export const Hero = ({ onFrameChange, onExplore }: HeroProps) => {
             <dd className="mt-1.5 text-sm leading-relaxed text-muted">{frame.focusText}</dd>
             <dd className="mt-5 flex items-center justify-between gap-4">
               <a
-                href="#flow-lab"
+                href="#lab"
                 onClick={onExplore}
                 className="link-draw inline-flex min-h-11 items-center text-sm font-medium text-accent"
               >
